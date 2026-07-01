@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Banarasi Sanskriti</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .admin-container { max-width: 1000px; margin: 120px auto; padding: 20px; }
+    .admin-panel { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start; }
+    .admin-form { background: var(--color-bg-deep); padding: 30px; border-radius: 8px; border: 1px solid rgba(201,168,76,0.2); position: sticky; top: 120px; }
+    .admin-form h2 { color: var(--color-accent); font-family: var(--font-display); margin-bottom: 20px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #fff; }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body); }
+    .admin-btn { background: var(--color-accent); color: var(--color-bg-dark); border: none; padding: 12px 24px; font-weight: bold; cursor: pointer; width: 100%; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; transition: background 0.3s; }
+    .admin-btn:hover { background: #fff; }
+    .product-list { display: flex; flex-direction: column; gap: 16px; }
+    .product-item { display: flex; align-items: center; justify-content: space-between; background: var(--color-bg-deep); padding: 16px; border-radius: 4px; border: 1px solid rgba(201,168,76,0.1); }
+    .product-item img { width: 60px; height: 80px; object-fit: cover; border-radius: 4px; margin-right: 16px; }
+    .product-info { flex-grow: 1; }
+    .product-info h4 { color: #fff; margin-bottom: 4px; font-family: var(--font-display); font-size: 1.2rem; }
+    .product-info p { color: rgba(245,240,232,0.6); font-size: 0.85rem; }
+    .delete-btn { color: #ff4444; background: transparent; border: 1px solid #ff4444; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
+    .delete-btn:hover { background: #ff4444; color: #fff; }
+    
+    @media (max-width: 768px) {
+      .admin-panel { grid-template-columns: 1fr; }
+      .admin-form { position: static; }
+    }
+  </style>
+</head>
+<body class="collection-page">
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">Banarasi Sanskriti</a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/collection">Collections</a></li>
+        <li><a href="/admin" style="color: var(--color-accent);">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="admin-container">
+    <div class="admin-panel">
+      <!-- Upload Form -->
+      <div class="admin-form">
+        <h2>Add New Product</h2>
+        <form id="uploadForm">
+          <div class="form-group">
+            <label>Product Title</label>
+            <input type="text" id="title" required placeholder="e.g. Crimson Heritage">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="desc" rows="3" required placeholder="e.g. Pure Silk with Gold Zari"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="text" id="price" required placeholder="e.g. ₹45,000">
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Collection</label>
+              <select id="collectionType" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
+                <option value="Katan Silk" style="background:#110e0c;">Katan Silk</option>
+                <option value="Organza (Kora)" style="background:#110e0c;">Organza (Kora)</option>
+                <option value="Georgette" style="background:#110e0c;">Georgette</option>
+                <option value="Shattir" style="background:#110e0c;">Shattir</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Color Family</label>
+              <select id="colorFamily" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
+                <option value="Crimson Red" style="background:#110e0c;">Crimson Red</option>
+                <option value="Midnight Blue" style="background:#110e0c;">Midnight Blue</option>
+                <option value="Emerald Green" style="background:#110e0c;">Emerald Green</option>
+                <option value="Golden Glow" style="background:#110e0c;">Golden Glow</option>
+                <option value="Ivory" style="background:#110e0c;">Ivory</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Price Range</label>
+              <select id="priceRange" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
+                <option value="₹10,000 - ₹25,000" style="background:#110e0c;">₹10,000 - ₹25,000</option>
+                <option value="₹25,000 - ₹50,000" style="background:#110e0c;">₹25,000 - ₹50,000</option>
+                <option value="₹50,000+" style="background:#110e0c;">₹50,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Pattern</label>
+              <select id="pattern" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
+                <option value="Floral Jaal" style="background:#110e0c;">Floral Jaal</option>
+                <option value="Geometric Buti" style="background:#110e0c;">Geometric Buti</option>
+                <option value="Shikargah" style="background:#110e0c;">Shikargah</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Product Image</label>
+            <input type="file" id="image" accept="image/*" required>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="admin-btn" id="submitBtn" style="flex: 1;">Upload Product</button>
+            <button type="button" class="admin-btn" id="cancelBtn" style="display: none; background: transparent; border: 1px solid var(--color-accent); color: var(--color-accent); flex: 1;">Cancel</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Product List -->
+      <div>
+        <h2 style="color: var(--color-accent); font-family: var(--font-display); margin-bottom: 20px;">Current Inventory</h2>
+        <div class="product-list" id="productList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
