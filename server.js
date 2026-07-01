@@ -229,6 +229,11 @@ app.delete('/api/enquiries/:id', async (req, res) => {
     }
 });
 
+// Route: Clean URL mapping for collections
+app.get('/collection/:type', (req, res) => {
+    res.sendFile(path.join(__dirname, 'collection.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

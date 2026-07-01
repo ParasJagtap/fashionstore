@@ -35,9 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Get the query parameter
+  // Get the query parameter or path parameter
   const urlParams = new URLSearchParams(window.location.search);
-  const type = urlParams.get('type');
+  let type = urlParams.get('type');
+  if (!type) {
+    const parts = window.location.pathname.split('/');
+    if (parts.length >= 3 && parts[1] === 'collection') {
+      type = parts[2];
+    }
+  }
 
   // Populate data if type exists
   if (type && collectionData[type]) {
@@ -72,9 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (catalogGrid) {
     let allProducts = [];
     
-    // Check if there's a type in URL
+    // Check if there's a type in URL (query param or subpath)
     const urlParams = new URLSearchParams(window.location.search);
     let activeCollection = urlParams.get('type') || '';
+    if (!activeCollection) {
+      const parts = window.location.pathname.split('/');
+      if (parts.length >= 3 && parts[1] === 'collection') {
+        activeCollection = parts[2];
+      }
+    }
     
     // Update active state on collection links
     collectionLinks.forEach(link => {
@@ -86,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.classList.add('active');
         
         // Update URL without reloading
-        window.history.pushState({}, '', `collection?type=${activeCollection}`);
+        window.history.pushState({}, '', `/collection/${activeCollection}`);
         renderProducts();
       });
       
@@ -162,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
           gridHtml += `
             <div class="catalog-card" onclick="openModal('${p.id}')">
               <div class="card-image-wrap">
-                <img src="${p.image}" alt="${p.title}" loading="lazy">
+                 <img src="${p.image.startsWith('/') ? p.image : '/' + p.image}" alt="${p.title}" loading="lazy">
               </div>
               <div class="card-info">
                 <h3 class="card-title">${p.title}</h3>
@@ -222,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const p = allProducts.find(product => String(product.id) === String(id));
       if (p) {
         activeProduct = p;
-        document.getElementById('modalImg').src = p.image;
+        document.getElementById('modalImg').src = p.image.startsWith('/') ? p.image : '/' + p.image;
         document.getElementById('modalBadge').textContent = p.collectionType || 'Banarasi';
         document.getElementById('modalTitle').textContent = p.title;
         document.getElementById('modalDesc').textContent = p.desc || '';

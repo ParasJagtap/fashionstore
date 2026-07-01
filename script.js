@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalWeave').textContent = data.weave;
     document.getElementById('modalOccasion').textContent = data.occasion;
     document.getElementById('modalPrice').textContent = data.price;
-    document.getElementById('modalCta').href = `collection?type=${key}`;
+    document.getElementById('modalCta').href = `/collection/${key}`;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
