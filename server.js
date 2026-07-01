@@ -69,6 +69,40 @@ const sendEmailNotification = async (enquiry) => {
     }
 };
 
+// Basic Auth Middleware
+const auth = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        res.setHeader('WWW-Authenticate', 'Basic realm="Admin Portal"');
+        return res.status(401).send('Authentication required');
+    }
+
+    const credentials = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+    const user = credentials[0];
+    const pass = credentials[1];
+
+    const expectedUser = process.env.ADMIN_USER || 'admin';
+    const expectedPass = process.env.ADMIN_PASS || 'sanskriti2026';
+
+    if (user === expectedUser && pass === expectedPass) {
+        next();
+    } else {
+        res.setHeader('WWW-Authenticate', 'Basic realm="Admin Portal"');
+        return res.status(401).send('Authentication required');
+    }
+};
+
+// Secure Admin Portal View Route
+const adminPath = process.env.ADMIN_PATH || '/admin-sanskriti-portal';
+app.get(adminPath, auth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin.view'));
+});
+
+// Obscure standard /admin and /admin.html paths to return 404
+app.get(['/admin', '/admin.html'], (req, res) => {
+    res.status(404).send('Not Found');
+});
+
 // Configure Multer for image uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -93,7 +127,7 @@ app.get('/api/products', async (req, res) => {
 });
 
 // API: Add new product
-app.post('/api/products', upload.single('image'), async (req, res) => {
+app.post('/api/products', auth, upload.single('image'), async (req, res) => {
     try {
         const { title, desc, price, collectionType, colorFamily, priceRange, pattern } = req.body;
         
@@ -122,7 +156,7 @@ app.post('/api/products', upload.single('image'), async (req, res) => {
 });
 
 // API: Update product
-app.put('/api/products/:id', upload.single('image'), async (req, res) => {
+app.put('/api/products/:id', auth, upload.single('image'), async (req, res) => {
     try {
         const id = req.params.id;
         const { title, desc, price, collectionType, colorFamily, priceRange, pattern } = req.body;
@@ -159,7 +193,7 @@ app.put('/api/products/:id', upload.single('image'), async (req, res) => {
 });
 
 // API: Delete product
-app.delete('/api/products/:id', async (req, res) => {
+app.delete('/api/products/:id', auth, async (req, res) => {
     try {
         const id = req.params.id;
         const result = await pool.query('DELETE FROM products WHERE id = $1', [id]);
@@ -202,7 +236,7 @@ app.post('/api/enquiries', async (req, res) => {
 });
 
 // API: Get all enquiries (for Admin Dashboard)
-app.get('/api/enquiries', async (req, res) => {
+app.get('/api/enquiries', auth, async (req, res) => {
     try {
         const { rows } = await pool.query('SELECT * FROM enquiries ORDER BY created_at DESC');
         res.json(rows);
@@ -213,7 +247,7 @@ app.get('/api/enquiries', async (req, res) => {
 });
 
 // API: Delete enquiry (for Admin Dashboard)
-app.delete('/api/enquiries/:id', async (req, res) => {
+app.delete('/api/enquiries/:id', auth, async (req, res) => {
     try {
         const id = req.params.id;
         const result = await pool.query('DELETE FROM enquiries WHERE id = $1', [id]);

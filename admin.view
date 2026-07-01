@@ -49,7 +49,6 @@
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/collection">Collections</a></li>
-        <li><a href="/admin" style="color: var(--color-accent);">Admin</a></li>
       </ul>
     </div>
   </nav>
@@ -149,6 +148,6 @@
     </div>
   </div>
 
-  <script src="admin.js"></script>
+  <script src="/admin.js"></script>
 </body>
 </html>
