@@ -141,9 +141,27 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const btn = form.querySelector('.submit-btn');
       const originalText = btn.textContent;
+      
+      const name = document.getElementById('form-name').value;
+      const email = document.getElementById('form-email').value;
+      const phone = document.getElementById('form-phone').value;
+      const message = document.getElementById('form-message').value;
+
       btn.textContent = 'Sending...';
       btn.style.pointerEvents = 'none';
-      setTimeout(() => {
+
+      fetch('/api/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, phone, message })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to send');
+        return res.json();
+      })
+      .then(data => {
         btn.textContent = '✓ Sent Successfully';
         btn.style.background = 'var(--color-accent)';
         btn.style.color = 'var(--color-bg-dark)';
@@ -154,7 +172,19 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.style.pointerEvents = '';
           form.reset();
         }, 3000);
-      }, 1500);
+      })
+      .catch(err => {
+        console.error(err);
+        btn.textContent = '❌ Failed to Send';
+        btn.style.background = '#ff4d4d';
+        btn.style.color = '#fff';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.style.pointerEvents = '';
+        }, 3000);
+      });
     });
   }
 

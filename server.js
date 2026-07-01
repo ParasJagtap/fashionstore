@@ -128,6 +128,57 @@ app.delete('/api/products/:id', async (req, res) => {
     }
 });
 
+// API: Submit contact enquiry
+app.post('/api/enquiries', async (req, res) => {
+    try {
+        const { name, email, phone, message } = req.body;
+        
+        if (!name || !email || !message) {
+            return res.status(400).json({ error: 'Name, email, and message are required' });
+        }
+
+        const queryText = `
+            INSERT INTO enquiries (name, email, phone, message)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *
+        `;
+        const { rows } = await pool.query(queryText, [name, email, phone, message]);
+
+        res.status(201).json({ message: 'Enquiry submitted successfully', enquiry: rows[0] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to save enquiry' });
+    }
+});
+
+// API: Get all enquiries (for Admin Dashboard)
+app.get('/api/enquiries', async (req, res) => {
+    try {
+        const { rows } = await pool.query('SELECT * FROM enquiries ORDER BY created_at DESC');
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch enquiries' });
+    }
+});
+
+// API: Delete enquiry (for Admin Dashboard)
+app.delete('/api/enquiries/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await pool.query('DELETE FROM enquiries WHERE id = $1', [id]);
+        
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Enquiry not found' });
+        }
+        
+        res.json({ message: 'Enquiry deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to delete enquiry' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

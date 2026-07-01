@@ -2,6 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadForm = document.getElementById('uploadForm');
     const productList = document.getElementById('productList');
     const cancelBtn = document.getElementById('cancelBtn');
+    
+    // Tab switching elements
+    const tabInventoryBtn = document.getElementById('tabInventoryBtn');
+    const tabEnquiriesBtn = document.getElementById('tabEnquiriesBtn');
+    const inventorySection = document.getElementById('inventorySection');
+    const enquiriesSection = document.getElementById('enquiriesSection');
+    const enquiryList = document.getElementById('enquiryList');
+
     let currentEditId = null;
     let productsData = [];
 
@@ -129,6 +137,78 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error('Failed to delete', err);
+        }
+    };
+
+    // --- Tab Switching Logic ---
+    tabInventoryBtn.addEventListener('click', () => {
+        tabInventoryBtn.classList.add('active');
+        tabEnquiriesBtn.classList.remove('active');
+        inventorySection.style.display = 'block';
+        enquiriesSection.style.display = 'none';
+        loadProducts();
+    });
+
+    tabEnquiriesBtn.addEventListener('click', () => {
+        tabEnquiriesBtn.classList.add('active');
+        tabInventoryBtn.classList.remove('active');
+        inventorySection.style.display = 'none';
+        enquiriesSection.style.display = 'block';
+        loadEnquiries();
+    });
+
+    // --- Enquiries Logic ---
+    const loadEnquiries = async () => {
+        try {
+            const res = await fetch('/api/enquiries');
+            if (!res.ok) throw new Error('Failed to fetch');
+            const enquiries = await res.json();
+            enquiryList.innerHTML = '';
+
+            if (enquiries.length === 0) {
+                enquiryList.innerHTML = '<p style="color:#fff; padding: 20px 0;">No customer enquiries found.</p>';
+                return;
+            }
+
+            enquiries.forEach(e => {
+                const dateStr = new Date(e.created_at).toLocaleString('en-IN');
+                const card = document.createElement('div');
+                card.className = 'enquiry-card';
+                card.innerHTML = `
+                    <div class="enquiry-header">
+                        <div class="enquiry-meta">
+                            <h4>${e.name}</h4>
+                            <p><i class="fas fa-envelope"></i> ${e.email} | <i class="fas fa-phone-alt"></i> ${e.phone || 'N/A'}</p>
+                            <p style="margin-top:4px; font-size:0.8rem; color:rgba(245,240,232,0.4);"><i class="fas fa-calendar-alt"></i> ${dateStr}</p>
+                        </div>
+                    </div>
+                    <div class="enquiry-body">
+                        ${e.message}
+                    </div>
+                    <button class="enquiry-delete-btn" onclick="deleteEnquiry(${e.id})">Delete</button>
+                `;
+                enquiryList.appendChild(card);
+            });
+        } catch (err) {
+            console.error('Failed to load enquiries', err);
+            enquiryList.innerHTML = '<p style="color:red; padding: 20px 0;">Error loading enquiries.</p>';
+        }
+    };
+
+    window.deleteEnquiry = async (id) => {
+        if (!confirm('Are you sure you want to delete this enquiry?')) return;
+        try {
+            const res = await fetch(`/api/enquiries/${id}`, {
+                method: 'DELETE'
+            });
+            if (res.ok) {
+                loadEnquiries();
+            } else {
+                alert('Failed to delete enquiry');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Error deleting enquiry');
         }
     };
 
