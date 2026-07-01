@@ -193,13 +193,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('modalClose');
     const backdrop = document.getElementById('modalBackdrop');
     
-    if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-    if (backdrop) backdrop.addEventListener('click', () => modal.classList.remove('active'));
+    // Inline Enquiry Form elements
+    const modalSpecsView = document.getElementById('modalSpecsView');
+    const modalFormView = document.getElementById('modalFormView');
+    const modalEnquireBtn = document.getElementById('modalEnquireBtn');
+    const modalFormBackBtn = document.getElementById('modalFormBackBtn');
+    const modalEnquiryForm = document.getElementById('modalEnquiryForm');
+
+    const resetModalView = () => {
+      modalSpecsView.style.display = 'block';
+      modalFormView.style.display = 'none';
+      modalEnquiryForm.reset();
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      resetModalView();
+    });
+    if (backdrop) backdrop.addEventListener('click', () => {
+      modal.classList.remove('active');
+      resetModalView();
+    });
+
+    let activeProduct = null;
 
     window.openModal = (id) => {
       // Find exact product (handle both string/int id matching just in case)
       const p = allProducts.find(product => String(product.id) === String(id));
       if (p) {
+        activeProduct = p;
         document.getElementById('modalImg').src = p.image;
         document.getElementById('modalBadge').textContent = p.collectionType || 'Banarasi';
         document.getElementById('modalTitle').textContent = p.title;
@@ -208,16 +230,85 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modalPattern').textContent = p.pattern || '-';
         document.getElementById('modalPrice').textContent = p.price || '-';
         
-        // Update the Enquire Now URL dynamically with product info
-        const enquireBtn = document.getElementById('modalEnquireBtn');
-        if (enquireBtn) {
-          const productInfo = `Namaste, I am interested in acquiring the "${p.title}" saree from the ${p.collectionType || ''} collection (Color: ${p.colorFamily || '-'}, Pattern: ${p.pattern || '-'}). Please share pricing and availability.`;
-          enquireBtn.href = `/?enquire=${encodeURIComponent(productInfo)}#contact`;
-        }
-        
         modal.classList.add('active');
       }
     };
+
+    // Toggle view to Enquiry Form
+    if (modalEnquireBtn) {
+      modalEnquireBtn.addEventListener('click', () => {
+        if (!activeProduct) return;
+        modalSpecsView.style.display = 'none';
+        modalFormView.style.display = 'block';
+        
+        // Pre-fill message field
+        const messageField = document.getElementById('modal-form-message');
+        if (messageField) {
+          messageField.value = `Namaste, I am interested in acquiring the "${activeProduct.title}" saree from the ${activeProduct.collectionType || ''} collection (Color: ${activeProduct.colorFamily || '-'}, Pattern: ${activeProduct.pattern || '-'}). Please share pricing and availability.`;
+        }
+      });
+    }
+
+    // Toggle view back to Specs
+    if (modalFormBackBtn) {
+      modalFormBackBtn.addEventListener('click', () => {
+        modalSpecsView.style.display = 'block';
+        modalFormView.style.display = 'none';
+      });
+    }
+
+    // Handle inline form submission
+    if (modalEnquiryForm) {
+      modalEnquiryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('modalFormSubmitBtn');
+        const originalText = submitBtn.textContent;
+
+        const name = document.getElementById('modal-form-name').value;
+        const email = document.getElementById('modal-form-email').value;
+        const phone = document.getElementById('modal-form-phone').value;
+        const message = document.getElementById('modal-form-message').value;
+
+        submitBtn.textContent = 'Sending...';
+        submitBtn.style.pointerEvents = 'none';
+
+        try {
+          const res = await fetch('/api/enquiries', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, phone, message })
+          });
+
+          if (!res.ok) throw new Error('Failed to send');
+
+          submitBtn.textContent = '✓ Sent Successfully';
+          submitBtn.style.background = 'var(--color-accent)';
+          submitBtn.style.color = 'var(--color-bg-dark)';
+
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = '';
+            submitBtn.style.color = '';
+            submitBtn.style.pointerEvents = '';
+            modal.classList.remove('active');
+            resetModalView();
+          }, 2000);
+        } catch (err) {
+          console.error(err);
+          submitBtn.textContent = '❌ Failed to Send';
+          submitBtn.style.background = '#ff4d4d';
+          submitBtn.style.color = '#fff';
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = '';
+            submitBtn.style.color = '';
+            submitBtn.style.pointerEvents = '';
+          }, 2000);
+        }
+      });
+    }
 
     // Initial Fetch
     fetch('/api/products')

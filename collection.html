@@ -146,34 +146,60 @@
         <div class="modal-image">
           <img id="modalImg" src="" alt="Product">
         </div>
-        <div class="modal-details">
-          <span class="collection-badge" id="modalBadge">Collection</span>
-          <h2 class="modal-title" id="modalTitle">Product Title</h2>
-          <p class="modal-desc" id="modalDesc">Product description</p>
-          <div class="modal-specs">
-            <div class="modal-spec-item">
-              <i class="fas fa-palette"></i>
-              <div>
-                <strong>Color</strong>
-                <span id="modalColor">Color Name</span>
+        <div class="modal-details" id="modalDetailsPanel">
+          <!-- View 1: Product Specifications -->
+          <div id="modalSpecsView">
+            <span class="collection-badge" id="modalBadge">Collection</span>
+            <h2 class="modal-title" id="modalTitle">Product Title</h2>
+            <p class="modal-desc" id="modalDesc">Product description</p>
+            <div class="modal-specs">
+              <div class="modal-spec-item">
+                <i class="fas fa-palette"></i>
+                <div>
+                  <strong>Color</strong>
+                  <span id="modalColor">Color Name</span>
+                </div>
+              </div>
+              <div class="modal-spec-item">
+                <i class="fas fa-vector-square"></i>
+                <div>
+                  <strong>Pattern</strong>
+                  <span id="modalPattern">Pattern Name</span>
+                </div>
+              </div>
+              <div class="modal-spec-item" style="display: none;">
+                <i class="fas fa-tag"></i>
+                <div>
+                  <strong>Price</strong>
+                  <span id="modalPrice">Price</span>
+                </div>
               </div>
             </div>
-            <div class="modal-spec-item">
-              <i class="fas fa-vector-square"></i>
-              <div>
-                <strong>Pattern</strong>
-                <span id="modalPattern">Pattern Name</span>
-              </div>
-            </div>
-            <div class="modal-spec-item" style="display: none;">
-              <i class="fas fa-tag"></i>
-              <div>
-                <strong>Price</strong>
-                <span id="modalPrice">Price</span>
-              </div>
-            </div>
+            <button class="modal-cta" id="modalEnquireBtn" style="width: 100%; margin-top: 24px;">Enquire Now</button>
           </div>
-          <a href="/#contact" class="modal-cta" id="modalEnquireBtn">Enquire Now</a>
+
+          <!-- View 2: Quick Enquiry Form -->
+          <div id="modalFormView" style="display: none;">
+            <button id="modalFormBackBtn" style="color: var(--color-accent); font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; border: none; background: transparent; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">
+              <i class="fas fa-arrow-left"></i> Back to Details
+            </button>
+            <h3 style="color: #fff; font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 20px; font-weight: 500;">Product Enquiry</h3>
+            <form id="modalEnquiryForm" style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <input type="text" id="modal-form-name" placeholder="Your Name" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <input type="email" id="modal-form-email" placeholder="Email Address" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <input type="tel" id="modal-form-phone" placeholder="Phone Number (Optional)" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <textarea id="modal-form-message" placeholder="Message..." rows="4" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem; resize: none;"></textarea>
+              </div>
+              <button type="submit" class="modal-cta" id="modalFormSubmitBtn" style="width: 100%;">Send Enquiry</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
