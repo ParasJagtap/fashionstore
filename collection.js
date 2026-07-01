@@ -208,6 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modalPattern').textContent = p.pattern || '-';
         document.getElementById('modalPrice').textContent = p.price || '-';
         
+        // Update the Enquire Now URL dynamically with product info
+        const enquireBtn = document.getElementById('modalEnquireBtn');
+        if (enquireBtn) {
+          const productInfo = `Namaste, I am interested in acquiring the "${p.title}" saree from the ${p.collectionType || ''} collection (Color: ${p.colorFamily || '-'}, Pattern: ${p.pattern || '-'}). Please share pricing and availability.`;
+          enquireBtn.href = `/#contact?enquire=${encodeURIComponent(productInfo)}`;
+        }
+        
         modal.classList.add('active');
       }
     };

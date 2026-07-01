@@ -258,4 +258,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeModal();
   });
 
+  // --- Auto-fill Enquiry from URL parameters ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const enquireText = urlParams.get('enquire');
+  if (enquireText) {
+    const messageField = document.getElementById('form-message');
+    if (messageField) {
+      messageField.value = decodeURIComponent(enquireText);
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        setTimeout(() => {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }, 400);
+      }
+    }
+  }
+
 });
