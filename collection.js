@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const enquireBtn = document.getElementById('modalEnquireBtn');
         if (enquireBtn) {
           const productInfo = `Namaste, I am interested in acquiring the "${p.title}" saree from the ${p.collectionType || ''} collection (Color: ${p.colorFamily || '-'}, Pattern: ${p.pattern || '-'}). Please share pricing and availability.`;
-          enquireBtn.href = `/#contact?enquire=${encodeURIComponent(productInfo)}`;
+          enquireBtn.href = `/?enquire=${encodeURIComponent(productInfo)}#contact`;
         }
         
         modal.classList.add('active');
