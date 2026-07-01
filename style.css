@@ -1172,6 +1172,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .spec-card-wide { grid-column: auto; }
 }
 @media (max-width: 768px) {
+  .navbar {
+    padding: 10px 0;
+  }
+  .navbar.scrolled {
+    padding: 8px 0;
+  }
+  .nav-logo {
+    height: 70px;
+  }
+  .navbar.scrolled .nav-logo {
+    height: 50px;
+  }
   .nav-links {
     position: fixed; top: 0; right: -100%;
     width: 80%; max-width: 360px; height: 100vh;
