@@ -25,7 +25,7 @@
 
 /* --- Reset --- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 body {
   font-family: var(--font-body);
   color: var(--color-text-dark);
@@ -529,9 +529,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 @media (max-width: 768px) {
-  .modal-body { grid-template-columns: 1fr; }
+  .modal-body { grid-template-columns: 1fr; overflow-y: auto; }
   .modal-image img { min-height: 250px; max-height: 300px; }
-  .modal-details { padding: 28px 24px; }
+  .modal-details { padding: 28px 24px; overflow-y: visible; }
   .modal-title { font-size: 1.4rem; }
 }
 
