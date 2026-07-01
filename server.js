@@ -22,6 +22,53 @@ const pool = new Pool({
     }
 });
 
+// Helper function to send email notification via Resend API
+const sendEmailNotification = async (enquiry) => {
+    if (!process.env.RESEND_API_KEY) {
+        console.log('Skipping email notification: RESEND_API_KEY is not set in environment variables.');
+        return;
+    }
+    
+    try {
+        const response = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
+            },
+            body: JSON.stringify({
+                from: 'Banarasi Sanskriti <onboarding@resend.dev>',
+                to: process.env.NOTIFICATION_EMAIL || 'info@banarasisanskriti.com',
+                subject: `New Saree Enquiry from ${enquiry.name}`,
+                html: `
+                    <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 24px; border-radius: 8px;">
+                        <h2 style="color: #8B1A2B; margin-top: 0; font-family: Georgia, serif;">New Customer Enquiry Received</h2>
+                        <hr style="border: 0; border-top: 1px solid #8B1A2B; margin: 20px 0;">
+                        <p><strong>Customer Name:</strong> ${enquiry.name}</p>
+                        <p><strong>Email Address:</strong> ${enquiry.email}</p>
+                        <p><strong>Phone Number:</strong> ${enquiry.phone || 'N/A'}</p>
+                        <p><strong>Message / Requirements:</strong></p>
+                        <div style="background: #FAF6F0; padding: 16px; border-left: 4px solid #C9A84C; font-style: italic; white-space: pre-line; line-height: 1.6; color: #2C1810; border-radius: 0 4px 4px 0;">
+                            ${enquiry.message}
+                        </div>
+                        <br>
+                        <p style="font-size: 0.8rem; color: #888; margin-bottom: 0;">Submitted on ${new Date(enquiry.created_at).toLocaleString('en-IN')}</p>
+                    </div>
+                `
+            })
+        });
+
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            console.error('Failed to send email notification:', errData);
+        } else {
+            console.log('Email notification sent successfully.');
+        }
+    } catch (err) {
+        console.error('Email notification error:', err);
+    }
+};
+
 // Configure Multer for image uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -143,6 +190,9 @@ app.post('/api/enquiries', async (req, res) => {
             RETURNING *
         `;
         const { rows } = await pool.query(queryText, [name, email, phone, message]);
+
+        // Send email asynchronously (non-blocking)
+        sendEmailNotification(rows[0]).catch(err => console.error('Email notification trigger failed:', err));
 
         res.status(201).json({ message: 'Enquiry submitted successfully', enquiry: rows[0] });
     } catch (err) {
