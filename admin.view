@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Panel - Banarasi Sanskriti</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="/style.css?v=3">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <style>
     .admin-container { max-width: 1000px; margin: 120px auto; padding: 20px; }
     .admin-panel { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start; }
