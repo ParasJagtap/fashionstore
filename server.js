@@ -95,7 +95,14 @@ const auth = (req, res, next) => {
 // Secure Admin Portal View Route
 const adminPath = process.env.ADMIN_PATH || '/admin-sanskriti-portal';
 app.get(adminPath, auth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.view'));
+    fs.readFile(path.join(__dirname, 'admin.view'), 'utf8', (err, content) => {
+        if (err) {
+            console.error('Error reading admin.view:', err);
+            return res.status(500).send('Server Error');
+        }
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    });
 });
 
 // Obscure standard /admin and /admin.html paths to return 404
