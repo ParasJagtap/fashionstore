@@ -102,6 +102,18 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProducts();
       });
       
+      // Mobile Filter Sidebar Toggle
+      const sidebar = document.querySelector('.catalog-sidebar');
+      const sidebarTitle = document.querySelector('.sidebar-title');
+      if (sidebarTitle && sidebar) {
+        sidebarTitle.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            sidebar.classList.toggle('active');
+            sidebarTitle.classList.toggle('active');
+          }
+        });
+      }
+      
       if (link.getAttribute('data-type') === activeCollection) {
         link.classList.add('active');
       }
