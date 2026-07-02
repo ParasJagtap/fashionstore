@@ -29,6 +29,111 @@ html, body {
   width: 100%;
   overflow-x: hidden;
 }
+/* --- Preloader Styles --- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-dark);
+  z-index: 10000;
+  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.8s;
+}
+.preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Hide links and hamburger during intro */
+.nav-links, .hamburger {
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 1s ease !important;
+}
+.navbar.ready-active .nav-links,
+.navbar.ready-active .hamburger {
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+.hero-content {
+  position: relative; z-index: 3;
+  text-align: center; padding: 0 24px;
+}
+.hero-tagline {
+  font-family: var(--font-accent); font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--color-accent-light);
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0;
+}
+.hero.ready .hero-tagline {
+  animation: fadeInUp 1s 0.3s forwards;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700; color: #fff;
+  line-height: 1.1; margin-bottom: 20px;
+  opacity: 0;
+}
+.hero.ready .hero-title {
+  animation: fadeInUp 1s 0.6s forwards;
+}
+.hero-slogan {
+  font-family: var(--font-accent); font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: var(--color-accent-light);
+  margin-bottom: 40px;
+  opacity: 0;
+}
+.hero.ready .hero-slogan {
+  animation: fadeInUp 1s 0.9s forwards;
+}
+.hero .ornament { opacity: 0; }
+.hero.ready .hero .ornament { animation: fadeInUp 1s 1.2s forwards; }
+.hero-cta {
+  display: inline-block; margin-top: 24px;
+  padding: 16px 48px;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  transition: all var(--transition);
+  opacity: 0;
+}
+.hero.ready .hero-cta {
+  animation: fadeInUp 1s 1.5s forwards;
+}
+.hero-cta:hover {
+  background: var(--color-accent); color: var(--color-bg-dark);
+  box-shadow: 0 0 40px rgba(201,168,76,0.3);
+}
+.hero-export-note {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--color-accent-light);
+  margin: 24px auto 0;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  max-width: 600px;
+  line-height: 1.6;
+}
+.hero.ready .hero-export-note {
+  animation: fadeInUp 1s 1.7s forwards;
+}
+.scroll-indicator {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%); z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--color-accent-light); font-size: 0.7rem;
+  letter-spacing: 3px; text-transform: uppercase;
+  opacity: 0;
+}
+.hero.ready .scroll-indicator {
+  animation: scrollFadeInUp 1s 1.8s forwards;
+}
 .showroom-specs {
   display: flex;
   justify-content: center;
@@ -429,6 +534,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   height: 140px; width: auto;
   transition: all var(--transition);
   filter: drop-shadow(0 0 8px rgba(201,168,76,0.3));
+  opacity: 0;
 }
 .navbar.scrolled .nav-logo {
   height: 80px;

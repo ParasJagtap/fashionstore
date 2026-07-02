@@ -3,9 +3,94 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Preloader FLIP Animation Controller ---
+  const preloader = document.getElementById('preloader');
+  const navLogo = document.querySelector('.nav-logo');
+  const navbar = document.getElementById('navbar');
+  const heroSection = document.querySelector('.hero');
+  
+  if (preloader && navLogo && navbar) {
+    document.body.style.overflow = 'hidden';
+    navbar.style.zIndex = '10001';
+    
+    let introRun = false;
+    
+    const cleanup = () => {
+      const activeLoader = document.getElementById('preloader');
+      if (activeLoader) activeLoader.remove();
+      document.body.style.overflow = '';
+      navbar.classList.add('ready-active');
+      if (heroSection) heroSection.classList.add('ready');
+      navLogo.style.opacity = '1';
+      navLogo.style.transition = '';
+      navLogo.style.transform = '';
+      navLogo.style.transformOrigin = '';
+      navbar.style.zIndex = '';
+    };
+
+    const runIntro = () => {
+      if (introRun) return;
+      introRun = true;
+      
+      // Short delay to let browser process layout so coords are valid
+      setTimeout(() => {
+        const rectLast = navLogo.getBoundingClientRect();
+        const centerY = window.innerHeight / 2;
+        const centerX = window.innerWidth / 2;
+        
+        // Fallbacks for logo size if layout hasn't completed yet
+        const logoWidth = rectLast.width || (window.innerWidth <= 768 ? 80 : 140);
+        const logoHeight = rectLast.height || (window.innerWidth <= 768 ? 80 : 140);
+        
+        const logoY = rectLast.top ? (rectLast.top + logoHeight / 2) : 50;
+        const logoX = rectLast.left ? (rectLast.left + logoWidth / 2) : 100;
+        
+        const deltaY = centerY - logoY;
+        const deltaX = centerX - logoX;
+        
+        const targetWidth = window.innerWidth <= 768 ? 240 : 400;
+        const scale = targetWidth / logoWidth;
+        
+        navLogo.style.transformOrigin = 'center center';
+        navLogo.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scale})`;
+        navLogo.style.opacity = '1';
+        
+        setTimeout(() => {
+          navLogo.style.transition = 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease';
+          navLogo.style.transform = 'translate(0, 0) scale(1)';
+          
+          setTimeout(() => {
+            preloader.classList.add('fade-out');
+          }, 300);
+          
+          setTimeout(() => {
+            cleanup();
+          }, 1200);
+        }, 1000);
+      }, 50);
+    };
+
+    // Safety fallback: ensure page is shown after 3.5s no matter what
+    const safetyTimeout = setTimeout(() => {
+      if (!introRun) {
+        console.warn('Preloader safety fallback triggered.');
+        cleanup();
+      }
+    }, 3500);
+
+    if (navLogo.complete) {
+      runIntro();
+    } else {
+      navLogo.addEventListener('load', runIntro);
+      setTimeout(runIntro, 200);
+    }
+  } else {
+    if (navbar) navbar.classList.add('ready-active');
+    if (heroSection) heroSection.classList.add('ready');
+    if (navLogo) navLogo.style.opacity = '1';
+  }
 
   // --- Navbar scroll effect ---
-  const navbar = document.getElementById('navbar');
   const handleScroll = () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   };
