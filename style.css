@@ -740,19 +740,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 8s ease;
+  transition: transform 8s ease, filter 0.5s ease;
+  filter: contrast(1.05) brightness(1.03);
+  image-rendering: -webkit-optimize-contrast;
 }
 .abaya-drop:hover .abaya-banner-img {
   transform: scale(1.03);
+  filter: contrast(1.08) brightness(1.05);
 }
 .abaya-banner-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(13,10,8,0.72) 0%,
-    rgba(13,10,8,0.35) 50%,
-    rgba(13,10,8,0.55) 100%
+    rgba(13,10,8,0.45) 0%,
+    rgba(13,10,8,0.1) 40%,
+    rgba(13,10,8,0.35) 100%
+  ),
+  linear-gradient(
+    to top,
+    rgba(13,10,8,0.5) 0%,
+    transparent 60%
   );
   display: flex;
   align-items: center;
@@ -780,6 +788,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   letter-spacing: 3px;
   text-transform: uppercase;
   font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 .abaya-title {
   font-family: var(--font-display);
@@ -787,13 +796,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #fff;
   font-weight: 700;
   line-height: 1.15;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.85);
 }
 .abaya-subtitle {
   font-family: var(--font-body);
   font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-  color: rgba(245,240,232,0.75);
+  color: rgba(245,240,232,0.9);
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 .abaya-cta {
   display: inline-block;
@@ -808,6 +819,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   text-transform: uppercase;
   transition: all var(--transition);
   align-self: flex-start;
+  background: rgba(13,10,8,0.4);
+  backdrop-filter: blur(4px);
 }
 .abaya-cta:hover {
   background: var(--color-accent);
@@ -824,9 +837,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .abaya-fusion-label {
   font-family: var(--font-body);
   font-size: clamp(0.85rem, 1.5vw, 1rem);
-  color: rgba(245,240,232,0.8);
+  color: rgba(245,240,232,0.9);
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 .abaya-fusion-title {
   font-family: var(--font-display);
@@ -834,6 +848,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #fff;
   font-weight: 600;
   line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.85);
 }
 .abaya-discover {
   font-family: var(--font-body);
