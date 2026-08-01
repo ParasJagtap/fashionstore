@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
       fabric: 'Silk blend with lighter thread count',
       weave: 'Simplified Banarasi weave',
       occasion: 'Daily Wear, Small Gatherings'
+    },
+    abaya: {
+      badge: 'New Collection Drop',
+      title: 'Luxury Abaya',
+      desc: 'A fusion of Banarasi heritage and UAE modernity — our Luxury Abaya collection brings the timeless artistry of handwoven Banarasi craftsmanship to contemporary silhouettes designed for the discerning modern woman.',
+      fabric: 'Premium Banarasi Silk & Blends',
+      weave: 'Handwoven Banarasi Zari work',
+      occasion: 'Everyday Luxury, Formal Events, Eid'
     }
   };
 
