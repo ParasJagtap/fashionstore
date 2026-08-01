@@ -150,7 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'katan': 'Katan Silk',
             'organza': 'Organza (Kora)',
             'georgette': 'Georgette',
-            'shattir': 'Shattir'
+            'shattir': 'Shattir',
+            'abaya': 'Luxury Abaya'
           };
           if (p.collectionType !== typeMap[activeCollection] && p.collectionType !== activeCollection) {
             return false;
