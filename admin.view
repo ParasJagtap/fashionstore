@@ -85,6 +85,7 @@
               <div class="form-group">
                 <label>Collection</label>
                 <select id="collectionType" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
+                  <option value="Luxury Abaya" style="background:#110e0c;">Luxury Abaya</option>
                   <option value="Katan Silk" style="background:#110e0c;">Katan Silk</option>
                   <option value="Organza (Kora)" style="background:#110e0c;">Organza (Kora)</option>
                   <option value="Georgette" style="background:#110e0c;">Georgette</option>
