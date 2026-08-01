@@ -272,7 +272,7 @@ app.delete('/api/enquiries/:id', auth, async (req, res) => {
 
 // Route: Clean URL mapping for collections
 app.get('/collection/:type', (req, res) => {
-    res.sendFile(path.join(__dirname, 'collection.html'));
+    res.sendFile('collection.html', { root: __dirname });
 });
 
 app.listen(PORT, () => {
