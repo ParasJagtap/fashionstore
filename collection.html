@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CGKFV8RBB"></script>
@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Banarasi Sanskriti — Collection Showroom</title>
   <meta name="description" content="Discover our exclusive Banarasi saree collections. Drape Yourself With Kashi Culture.">
-  <link rel="stylesheet" href="/style.css?v=12">
+  <link rel="stylesheet" href="/style.css?v=13">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
 </head>
@@ -25,21 +25,32 @@
     <div class="container">
       <a href="/#hero" class="nav-brand"><img src="/assets/images/logo.png" alt="Banarasi Sanskriti" class="nav-logo"></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="/#hero">Home</a></li>
-        <li><a href="/#heritage">Heritage</a></li>
+        <li><a href="/#hero" data-i18n="nav.home">Home</a></li>
+        <li><a href="/#heritage" data-i18n="nav.heritage">Heritage</a></li>
         <li class="dropdown">
-          <a href="/#collections">Collections <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+          <a href="/#collections"><span data-i18n="nav.collections">Collections</span> <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
           <ul class="dropdown-menu">
-            <li><a href="/collection/abaya">Luxury Abaya ✦</a></li>
-            <li><a href="/collection/katan">Katan Silk</a></li>
-            <li><a href="/collection/organza">Organza (Kora)</a></li>
-            <li><a href="/collection/georgette">Georgette</a></li>
-            <li><a href="/collection/shattir">Shattir</a></li>
+            <li><a href="/collection/abaya" data-i18n="nav.dd.abaya">Luxury Abaya ✦</a></li>
+            <li><a href="/collection/katan" data-i18n="nav.dd.katan">Katan Silk</a></li>
+            <li><a href="/collection/organza" data-i18n="nav.dd.organza">Organza (Kora)</a></li>
+            <li><a href="/collection/georgette" data-i18n="nav.dd.georgette">Georgette</a></li>
+            <li><a href="/collection/shattir" data-i18n="nav.dd.shattir">Shattir</a></li>
           </ul>
         </li>
-        <li><a href="/#craftsmanship">Craftsmanship</a></li>
-        <li><a href="/#specifications">Specifications</a></li>
-        <li><a href="/#contact" class="nav-cta">Enquire Now</a></li>
+        <li><a href="/#craftsmanship" data-i18n="nav.craftsmanship">Craftsmanship</a></li>
+        <li><a href="/#specifications" data-i18n="col.specs">Specifications</a></li>
+        <li><a href="/#contact" class="nav-cta" data-i18n="nav.enquire">Enquire Now</a></li>
+        <li class="lang-switcher">
+          <button class="lang-toggle" id="langToggle" aria-label="Switch Language">
+            <i class="fas fa-globe"></i>
+            <span id="langLabel">EN</span>
+            <i class="fas fa-chevron-down" style="font-size:0.6em;"></i>
+          </button>
+          <ul class="lang-dropdown">
+            <li><a href="#" class="lang-option active" data-lang="en">&#127468;&#127463; English</a></li>
+            <li><a href="#" class="lang-option" data-lang="ar">&#127462;&#127466; &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</a></li>
+          </ul>
+        </li>
       </ul>
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
@@ -58,15 +69,15 @@
         
         <div class="showroom-specs">
           <div class="spec-detail">
-            <span class="spec-label">Fabric</span>
+            <span class="spec-label" data-i18n="col.spec.fabric">Fabric</span>
             <span class="spec-value" id="showroomFabric">—</span>
           </div>
           <div class="spec-detail">
-            <span class="spec-label">Weave Type</span>
+            <span class="spec-label" data-i18n="col.spec.weave">Weave Type</span>
             <span class="spec-value" id="showroomWeave">—</span>
           </div>
           <div class="spec-detail">
-            <span class="spec-label">Ideal For</span>
+            <span class="spec-label" data-i18n="col.spec.ideal">Ideal For</span>
             <span class="spec-value" id="showroomOccasion">—</span>
           </div>
         </div>
@@ -80,27 +91,27 @@
       
       <!-- SIDEBAR FILTERS -->
       <aside class="catalog-sidebar reveal-left">
-        <h3 class="sidebar-title">Refine By <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--color-accent); transition: transform 0.3s ease;"></i></h3>
+        <h3 class="sidebar-title" data-i18n-html="col.refine">Refine By <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--color-accent); transition: transform 0.3s ease;"></i></h3>
 
         <div class="filter-group">
-          <h4 class="filter-title">Collection <i class="fas fa-chevron-down"></i></h4>
+          <h4 class="filter-title" data-i18n-html="col.filter.collection">Collection <i class="fas fa-chevron-down"></i></h4>
           <div class="filter-options" id="collectionSwitcher">
-            <a href="collection?type=abaya" class="filter-link" data-type="abaya">Luxury Abaya ✦</a>
-            <a href="collection?type=katan" class="filter-link" data-type="katan">Katan Silk</a>
-            <a href="collection?type=organza" class="filter-link" data-type="organza">Organza (Kora)</a>
-            <a href="collection?type=georgette" class="filter-link" data-type="georgette">Georgette</a>
-            <a href="collection?type=shattir" class="filter-link" data-type="shattir">Shattir</a>
+            <a href="collection?type=abaya" class="filter-link" data-type="abaya" data-i18n="nav.dd.abaya">Luxury Abaya ✦</a>
+            <a href="collection?type=katan" class="filter-link" data-type="katan" data-i18n="nav.dd.katan">Katan Silk</a>
+            <a href="collection?type=organza" class="filter-link" data-type="organza" data-i18n="nav.dd.organza">Organza (Kora)</a>
+            <a href="collection?type=georgette" class="filter-link" data-type="georgette" data-i18n="nav.dd.georgette">Georgette</a>
+            <a href="collection?type=shattir" class="filter-link" data-type="shattir" data-i18n="nav.dd.shattir">Shattir</a>
           </div>
         </div>
         
         <div class="filter-group">
-          <h4 class="filter-title">Color Family <i class="fas fa-chevron-down"></i></h4>
+          <h4 class="filter-title" data-i18n-html="col.filter.color">Color Family <i class="fas fa-chevron-down"></i></h4>
           <div class="filter-options">
-            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Crimson Red"> <span>Crimson Red</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Midnight Blue"> <span>Midnight Blue</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Emerald Green"> <span>Emerald Green</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Golden Glow"> <span>Golden Glow</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Ivory"> <span>Ivory</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Crimson Red"> <span data-i18n="color.crimson">Crimson Red</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Midnight Blue"> <span data-i18n="color.midnight">Midnight Blue</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Emerald Green"> <span data-i18n="color.emerald">Emerald Green</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Golden Glow"> <span data-i18n="color.golden">Golden Glow</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="colorFamily" value="Ivory"> <span data-i18n="color.ivory">Ivory</span></label>
           </div>
         </div>
 
@@ -114,11 +125,11 @@
         </div>
         
         <div class="filter-group">
-          <h4 class="filter-title">Pattern <i class="fas fa-chevron-down"></i></h4>
+          <h4 class="filter-title" data-i18n-html="col.filter.pattern">Pattern <i class="fas fa-chevron-down"></i></h4>
           <div class="filter-options">
-            <label class="filter-label"><input type="checkbox" data-filter="pattern" value="Floral Jaal"> <span>Floral Jaal</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="pattern" value="Geometric Buti"> <span>Geometric Buti</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="pattern" value="Shikargah"> <span>Shikargah</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="pattern" value="Floral Jaal"> <span data-i18n="pattern.jaal">Floral Jaal</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="pattern" value="Geometric Buti"> <span data-i18n="pattern.buti">Geometric Buti</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="pattern" value="Shikargah"> <span data-i18n="pattern.shikargah">Shikargah</span></label>
           </div>
         </div>
       </aside>
@@ -128,13 +139,13 @@
         
         <!-- TOOLBAR -->
         <div class="catalog-toolbar reveal">
-          <div class="toolbar-results">Showing 9 masterpieces</div>
+          <div class="toolbar-results" id="toolbarResults">Showing 9 masterpieces</div>
           <div class="toolbar-sort">
-            <label for="sort-select">Sort by:</label>
+            <label for="sort-select" data-i18n="col.sort.label">Sort by:</label>
             <div class="custom-select-wrapper">
               <select id="sort-select" class="sort-select">
-                <option>Recommended</option>
-                <option>New Arrivals</option>
+                <option data-i18n="col.sort.recommended">Recommended</option>
+                <option data-i18n="col.sort.newest">New Arrivals</option>
               </select>
               <i class="fas fa-chevron-down select-icon"></i>
             </div>
@@ -168,14 +179,14 @@
               <div class="modal-spec-item">
                 <i class="fas fa-palette"></i>
                 <div>
-                  <strong>Color</strong>
+                  <strong data-i18n="modal.color">Color</strong>
                   <span id="modalColor">Color Name</span>
                 </div>
               </div>
               <div class="modal-spec-item">
                 <i class="fas fa-vector-square"></i>
                 <div>
-                  <strong>Pattern</strong>
+                  <strong data-i18n="modal.pattern">Pattern</strong>
                   <span id="modalPattern">Pattern Name</span>
                 </div>
               </div>
@@ -187,29 +198,29 @@
                 </div>
               </div>
             </div>
-            <button class="modal-cta" id="modalEnquireBtn" style="width: 100%; margin-top: 24px;">Enquire Now</button>
+            <button class="modal-cta" id="modalEnquireBtn" style="width: 100%; margin-top: 24px;" data-i18n="nav.enquire">Enquire Now</button>
           </div>
 
           <!-- View 2: Quick Enquiry Form -->
           <div id="modalFormView" style="display: none;">
             <button id="modalFormBackBtn" style="color: var(--color-accent); font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; border: none; background: transparent; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">
-              <i class="fas fa-arrow-left"></i> Back to Details
+              <i class="fas fa-arrow-left"></i> <span data-i18n="modal.back">Back to Details</span>
             </button>
-            <h3 style="color: #fff; font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 20px; font-weight: 500;">Product Enquiry</h3>
+            <h3 style="color: #fff; font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 20px; font-weight: 500;" data-i18n="modal.enquiry.title">Product Enquiry</h3>
             <form id="modalEnquiryForm" style="display: flex; flex-direction: column; gap: 16px;">
               <div class="form-group" style="margin-bottom: 0;">
-                <input type="text" id="modal-form-name" placeholder="Your Name" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
+                <input type="text" id="modal-form-name" placeholder="Your Name" data-i18n-placeholder="contact.placeholder.name" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
               </div>
               <div class="form-group" style="margin-bottom: 0;">
-                <input type="email" id="modal-form-email" placeholder="Email Address" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
+                <input type="email" id="modal-form-email" placeholder="Email Address" data-i18n-placeholder="contact.placeholder.email" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
               </div>
               <div class="form-group" style="margin-bottom: 0;">
-                <input type="tel" id="modal-form-phone" placeholder="Phone Number (Optional)" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
+                <input type="tel" id="modal-form-phone" placeholder="Phone Number (Optional)" data-i18n-placeholder="contact.placeholder.phone" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem;">
               </div>
               <div class="form-group" style="margin-bottom: 0;">
-                <textarea id="modal-form-message" placeholder="Message..." rows="4" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem; resize: none;"></textarea>
+                <textarea id="modal-form-message" placeholder="Message..." data-i18n-placeholder="modal.placeholder.message" rows="4" required style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); color: #fff; border-radius: 4px; font-family: var(--font-body); font-size: 0.95rem; resize: none;"></textarea>
               </div>
-              <button type="submit" class="modal-cta" id="modalFormSubmitBtn" style="width: 100%;">Send Enquiry</button>
+              <button type="submit" class="modal-cta" id="modalFormSubmitBtn" style="width: 100%;" data-i18n="contact.submit">Send Enquiry</button>
             </form>
           </div>
         </div>
@@ -220,10 +231,10 @@
   <!-- ======== ENQUIRE CTA ======== -->
   <section class="enquire-cta section-padding">
     <div class="container text-center reveal">
-      <h2 class="section-title">Acquire a <span class="gold-text">Masterpiece</span></h2>
+      <h2 class="section-title" data-i18n-html="col.cta.title">Acquire a <span class="gold-text">Masterpiece</span></h2>
       <div class="ornament"><span class="ornament-icon">✦</span></div>
-      <p style="color:rgba(245,240,232,0.7); max-width: 600px; margin: 0 auto 32px; font-size:1.1rem;">Each piece in this collection is a testament to the timeless artistry of Banaras. To enquire about availability, pricing, or bespoke commissioning, please connect with our atelier.</p>
-      <a href="/#contact" class="submit-btn" style="display:inline-block;">Enquire Now</a>
+      <p style="color:rgba(245,240,232,0.7); max-width: 600px; margin: 0 auto 32px; font-size:1.1rem;" data-i18n="col.cta.desc">Each piece in this collection is a testament to the timeless artistry of Banaras. To enquire about availability, pricing, or bespoke commissioning, please connect with our atelier.</p>
+      <a href="/#contact" class="submit-btn" style="display:inline-block;" data-i18n="nav.enquire">Enquire Now</a>
     </div>
   </section>
 
@@ -232,17 +243,18 @@
     <div class="container">
       <div class="footer-content">
         <a href="/#hero" class="footer-brand"><img src="/assets/images/logo.png" alt="Banarasi Sanskriti" class="footer-logo"></a>
-        <p class="footer-text">&copy; 2026 Banarasi Sanskriti. All rights reserved. Handwoven with love in Varanasi.</p>
+        <p class="footer-text" data-i18n="footer.text">&copy; 2026 Banarasi Sanskriti. All rights reserved. Handwoven with love in Varanasi.</p>
         <div class="footer-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Shipping</a>
+          <a href="#" data-i18n="footer.privacy">Privacy</a>
+          <a href="#" data-i18n="footer.terms">Terms</a>
+          <a href="#" data-i18n="footer.shipping">Shipping</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="/script.js?v=3"></script>
-  <script src="/collection.js?v=3"></script>
+  <script src="/i18n.js"></script>
+  <script src="/script.js?v=7"></script>
+  <script src="/collection.js?v=4"></script>
 </body>
 </html>

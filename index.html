@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CGKFV8RBB"></script>
@@ -17,7 +17,7 @@
   <meta property="og:title" content="Banarasi Sanskriti — Premium Banarasi Sarees">
   <meta property="og:description" content="Drape Yourself With Kashi Culture. Exquisite handwoven Banarasi silk sarees from Varanasi.">
   <meta property="og:type" content="website">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
 </head>
@@ -31,22 +31,33 @@
     <div class="container">
       <a href="#hero" class="nav-brand"><img src="assets/images/logo.png" alt="Banarasi Sanskriti" class="nav-logo"></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#heritage">Heritage</a></li>
+        <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#heritage" data-i18n="nav.heritage">Heritage</a></li>
         <li class="dropdown">
-          <a href="#collections">Collections <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+          <a href="#collections"><span data-i18n="nav.collections">Collections</span> <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
           <ul class="dropdown-menu">
-            <li><a href="/collection/abaya">Luxury Abaya ✦</a></li>
-            <li><a href="/collection/katan">Katan Silk</a></li>
-            <li><a href="/collection/organza">Organza (Kora)</a></li>
-            <li><a href="/collection/georgette">Georgette</a></li>
-            <li><a href="/collection/shattir">Shattir</a></li>
+            <li><a href="/collection/abaya" data-i18n="nav.dd.abaya">Luxury Abaya ✦</a></li>
+            <li><a href="/collection/katan" data-i18n="nav.dd.katan">Katan Silk</a></li>
+            <li><a href="/collection/organza" data-i18n="nav.dd.organza">Organza (Kora)</a></li>
+            <li><a href="/collection/georgette" data-i18n="nav.dd.georgette">Georgette</a></li>
+            <li><a href="/collection/shattir" data-i18n="nav.dd.shattir">Shattir</a></li>
           </ul>
         </li>
-        <li><a href="#craftsmanship">Craftsmanship</a></li>
-        <li><a href="#team">Our Team</a></li>
-        <li><a href="#contact" class="nav-cta">Enquire Now</a></li>
+        <li><a href="#craftsmanship" data-i18n="nav.craftsmanship">Craftsmanship</a></li>
+        <li><a href="#team" data-i18n="nav.team">Our Team</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="nav.enquire">Enquire Now</a></li>
+        <li class="lang-switcher">
+          <button class="lang-toggle" id="langToggle" aria-label="Switch Language">
+            <i class="fas fa-globe"></i>
+            <span id="langLabel">EN</span>
+            <i class="fas fa-chevron-down" style="font-size:0.6em;"></i>
+          </button>
+          <ul class="lang-dropdown">
+            <li><a href="#" class="lang-option active" data-lang="en">&#127468;&#127463; English</a></li>
+            <li><a href="#" class="lang-option" data-lang="ar">&#127462;&#127466; &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</a></li>
+          </ul>
+        </li>
       </ul>
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
@@ -62,15 +73,15 @@
     <div class="hero-overlay"></div>
     <div class="hero-shimmer"></div>
     <div class="hero-content">
-      <p class="hero-tagline">Est. in the Heart of Kashi</p>
+      <p class="hero-tagline" data-i18n="hero.tagline">Est. in the Heart of Kashi</p>
       <h1 class="hero-title">Banarasi<br>Sanskriti</h1>
       <div class="ornament"><span class="ornament-icon">✦</span></div>
-      <p class="hero-slogan">Drape Yourself With Kashi Culture</p>
-      <a href="#collections" class="hero-cta">Explore Collections</a>
-      <p class="hero-export-note">We are now Proudly exporting our premium handwoven heritage to the GCC and Africa Regions.</p>
+      <p class="hero-slogan" data-i18n="hero.slogan">Drape Yourself With Kashi Culture</p>
+      <a href="#collections" class="hero-cta" data-i18n="hero.cta">Explore Collections</a>
+      <p class="hero-export-note" data-i18n="hero.export">We are now Proudly exporting our premium handwoven heritage to the GCC and Africa Regions.</p>
     </div>
     <div class="scroll-indicator">
-      <span>Scroll</span>
+      <span data-i18n="hero.scroll">Scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
@@ -82,15 +93,15 @@
       <div class="abaya-banner-overlay">
         <div class="abaya-banner-content">
           <div class="abaya-left">
-            <p class="abaya-brand-label">Banarasi Sanskriti</p>
-            <h2 class="abaya-title">The New Abaya<br>Collection Drop</h2>
-            <p class="abaya-subtitle">Explore Banarasi Culture Meets UAE Modernity</p>
-            <a href="/collection/abaya" class="abaya-cta">Shop the Drop Now</a>
+            <p class="abaya-brand-label" data-i18n="abaya.brand">Banarasi Sanskriti</p>
+            <h2 class="abaya-title" data-i18n-html="abaya.title">The New Abaya<br>Collection Drop</h2>
+            <p class="abaya-subtitle" data-i18n="abaya.subtitle">Explore Banarasi Culture Meets UAE Modernity</p>
+            <a href="/collection/abaya" class="abaya-cta" data-i18n="abaya.cta">Shop the Drop Now</a>
           </div>
           <div class="abaya-right">
-            <p class="abaya-fusion-label">A Fusion of Traditions:</p>
-            <h3 class="abaya-fusion-title">The New Abaya Collection</h3>
-            <a href="/collection/abaya" class="abaya-discover">Discover More</a>
+            <p class="abaya-fusion-label" data-i18n="abaya.fusion">A Fusion of Traditions:</p>
+            <h3 class="abaya-fusion-title" data-i18n="abaya.fusion-title">The New Abaya Collection</h3>
+            <a href="/collection/abaya" class="abaya-discover" data-i18n="abaya.discover">Discover More</a>
           </div>
         </div>
       </div>
@@ -105,23 +116,23 @@
           <img src="assets/images/heritage-varanasi.png" alt="Ancient Ghats of Varanasi">
         </div>
         <div class="heritage-content reveal-right">
-          <p class="section-subtitle">Our Legacy</p>
-          <h2 class="section-title">The Legacy<br>of <span class="gold-text">Kashi</span></h2>
+          <p class="section-subtitle" data-i18n="heritage.subtitle">Our Legacy</p>
+          <h2 class="section-title" data-i18n-html="heritage.title">The Legacy<br>of <span class="gold-text">Kashi</span></h2>
           <div class="ornament" style="margin:16px 0;max-width:200px;justify-content:flex-start"><span class="ornament-icon">✦</span></div>
-          <p>For over five millennia, the sacred city of Varanasi — Kashi — has been the cradle of India's finest textile artistry. Banarasi Sanskriti carries forward this magnificent legacy, bringing you handwoven sarees that embody the soul of an ancient civilization.</p>
-          <p>Each saree is a masterpiece born from the hands of our artisan families, who have perfected the art of weaving intricate gold and silver zari into the purest silks. Every thread tells a story of devotion, heritage, and timeless beauty.</p>
+          <p data-i18n="heritage.p1">For over five millennia, the sacred city of Varanasi — Kashi — has been the cradle of India's finest textile artistry. Banarasi Sanskriti carries forward this magnificent legacy, bringing you handwoven sarees that embody the soul of an ancient civilization.</p>
+          <p data-i18n="heritage.p2">Each saree is a masterpiece born from the hands of our artisan families, who have perfected the art of weaving intricate gold and silver zari into the purest silks. Every thread tells a story of devotion, heritage, and timeless beauty.</p>
           <div class="heritage-stats">
             <div class="stat-item">
               <div class="stat-number" data-target="5000">0</div>
-              <div class="stat-label">Years of Heritage</div>
+              <div class="stat-label" data-i18n="heritage.stat1">Years of Heritage</div>
             </div>
             <div class="stat-item">
               <div class="stat-number" data-target="120">0</div>
-              <div class="stat-label">Artisan Families</div>
+              <div class="stat-label" data-i18n="heritage.stat2">Artisan Families</div>
             </div>
             <div class="stat-item">
               <div class="stat-number" data-target="15000">0</div>
-              <div class="stat-label">Sarees Crafted</div>
+              <div class="stat-label" data-i18n="heritage.stat3">Sarees Crafted</div>
             </div>
           </div>
         </div>
@@ -134,13 +145,13 @@
     <div class="container">
       <div class="about-wrapper">
         <div class="text-center reveal">
-          <p class="section-subtitle">Our Journey</p>
-          <h2 class="section-title">About <span class="gold-text">Banarasi Sanskriti</span></h2>
+          <p class="section-subtitle" data-i18n="about.subtitle">Our Journey</p>
+          <h2 class="section-title" data-i18n-html="about.title">About <span class="gold-text">Banarasi Sanskriti</span></h2>
           <div class="ornament"><span class="ornament-icon">✦</span></div>
         </div>
         <div class="about-content reveal">
-          <p class="about-lead">Welcome to <em>Banarasi Sanskriti</em>, where heritage meets contemporary elegance. Rooted in the spiritual and cultural heart of Varanasi, we are dedicated to preserving, celebrating, and delivering the timeless art of traditional Indian weaves.</p>
-          <p class="about-text">Our journey is a tapestry woven from generations of expertise, an unyielding passion for authentic fabrics, and a deep-seated respect for the artisans who bring these textile masterpieces to life. From the intricate folds of a classic Banarasi saree to the refined grace of modern cultural attire, Banarasi Sanskriti bridges the gap between historical legacy and global fashion.</p>
+          <p class="about-lead" data-i18n-html="about.lead">Welcome to <em>Banarasi Sanskriti</em>, where heritage meets contemporary elegance. Rooted in the spiritual and cultural heart of Varanasi, we are dedicated to preserving, celebrating, and delivering the timeless art of traditional Indian weaves.</p>
+          <p class="about-text" data-i18n="about.text">Our journey is a tapestry woven from generations of expertise, an unyielding passion for authentic fabrics, and a deep-seated respect for the artisans who bring these textile masterpieces to life. From the intricate folds of a classic Banarasi saree to the refined grace of modern cultural attire, Banarasi Sanskriti bridges the gap between historical legacy and global fashion.</p>
         </div>
       </div>
     </div>
@@ -150,46 +161,46 @@
   <section class="collections section-padding" id="collections">
     <div class="container">
       <div class="text-center reveal">
-        <p class="section-subtitle">The "Gaadi" Concept</p>
-        <h2 class="section-title">Our Signature <span class="gold-text">Collections</span></h2>
+        <p class="section-subtitle" data-i18n="collections.subtitle">The "Gaadi" Concept</p>
+        <h2 class="section-title" data-i18n-html="collections.title">Our Signature <span class="gold-text">Collections</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
-        <p class="gaadi-intro">Just as a fine automobile is defined by its engine and craftsmanship, a Banarasi saree is defined by its weave and material integrity.</p>
+        <p class="gaadi-intro" data-i18n="collections.intro">Just as a fine automobile is defined by its engine and craftsmanship, a Banarasi saree is defined by its weave and material integrity.</p>
       </div>
       <div class="collections-grid collections-grid-4">
         <div class="collection-card reveal" data-collection="katan">
           <img src="assets/images/saree-katan-silk.png" alt="Katan Silk Saree" loading="lazy">
           <div class="collection-card-overlay">
-            <span class="collection-badge">The Sedan</span>
-            <h3 class="collection-name">Katan Silk</h3>
-            <p class="collection-desc">Pure silk, durable, and classic. Created by twisting pure silk threads together for a firm, resilient fabric that stands the test of time.</p>
-            <div class="collection-link">View Collection <span>→</span></div>
+            <span class="collection-badge" data-i18n="katan.badge">The Sedan</span>
+            <h3 class="collection-name" data-i18n="katan.name">Katan Silk</h3>
+            <p class="collection-desc" data-i18n="katan.desc">Pure silk, durable, and classic. Created by twisting pure silk threads together for a firm, resilient fabric that stands the test of time.</p>
+            <div class="collection-link" data-i18n="collection.view">View Collection →</div>
           </div>
         </div>
         <div class="collection-card reveal" data-collection="organza">
           <img src="assets/images/saree-organza.png" alt="Organza Kora with Zari Saree" loading="lazy">
           <div class="collection-card-overlay">
-            <span class="collection-badge">The Convertible</span>
-            <h3 class="collection-name">Organza (Kora) with Zari</h3>
-            <p class="collection-desc">Lightweight, airy, and sophisticated. Rich gold or silver borders contrast beautifully with the sheer, translucent body.</p>
-            <div class="collection-link">View Collection <span>→</span></div>
+            <span class="collection-badge" data-i18n="organza.badge">The Convertible</span>
+            <h3 class="collection-name" data-i18n="organza.name">Organza (Kora) with Zari</h3>
+            <p class="collection-desc" data-i18n="organza.desc">Lightweight, airy, and sophisticated. Rich gold or silver borders contrast beautifully with the sheer, translucent body.</p>
+            <div class="collection-link" data-i18n="collection.view">View Collection →</div>
           </div>
         </div>
         <div class="collection-card reveal" data-collection="georgette">
           <img src="assets/images/saree-georgette.png" alt="Georgette Saree" loading="lazy">
           <div class="collection-card-overlay">
-            <span class="collection-badge">The Sport Model</span>
-            <h3 class="collection-name">Georgette</h3>
-            <p class="collection-desc">High mobility and fluid drape. Made from crepe yarn — modern, easy to handle, and perfect for contemporary styling.</p>
-            <div class="collection-link">View Collection <span>→</span></div>
+            <span class="collection-badge" data-i18n="georgette.badge">The Sport Model</span>
+            <h3 class="collection-name" data-i18n="georgette.name">Georgette</h3>
+            <p class="collection-desc" data-i18n="georgette.desc">High mobility and fluid drape. Made from crepe yarn — modern, easy to handle, and perfect for contemporary styling.</p>
+            <div class="collection-link" data-i18n="collection.view">View Collection →</div>
           </div>
         </div>
         <div class="collection-card reveal" data-collection="shattir">
           <img src="assets/images/saree-shattir.png" alt="Shattir Saree" loading="lazy">
           <div class="collection-card-overlay">
-            <span class="collection-badge">The Daily Driver</span>
-            <h3 class="collection-name">Shattir</h3>
-            <p class="collection-desc">The most accessible and refined version of the Banarasi weave — elegant simplicity for more frequent, everyday wear.</p>
-            <div class="collection-link">View Collection <span>→</span></div>
+            <span class="collection-badge" data-i18n="shattir.badge">The Daily Driver</span>
+            <h3 class="collection-name" data-i18n="shattir.name">Shattir</h3>
+            <p class="collection-desc" data-i18n="shattir.desc">The most accessible and refined version of the Banarasi weave — elegant simplicity for more frequent, everyday wear.</p>
+            <div class="collection-link" data-i18n="collection.view">View Collection →</div>
           </div>
         </div>
       </div>
@@ -249,8 +260,8 @@
   <section class="craftsmanship section-padding" id="craftsmanship">
     <div class="container">
       <div class="text-center reveal">
-        <p class="section-subtitle" style="color:var(--color-accent-light)">Behind Every Thread</p>
-        <h2 class="section-title">The Art of <span class="gold-text">Handloom</span></h2>
+        <p class="section-subtitle" style="color:var(--color-accent-light)" data-i18n="craft.subtitle">Behind Every Thread</p>
+        <h2 class="section-title" data-i18n-html="craft.title">The Art of <span class="gold-text">Handloom</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
       </div>
       <div class="craft-wrapper">
@@ -261,36 +272,36 @@
           <div class="craft-step reveal-right">
             <div class="step-number">01</div>
             <div class="step-content">
-              <h4>Design & Pattern Making</h4>
-              <p>Master artisans hand-sketch intricate motifs inspired by Mughal jalis, sacred lotus blooms, and Kashi's temple architecture.</p>
+              <h4 data-i18n="step1.title">Design & Pattern Making</h4>
+              <p data-i18n="step1.desc">Master artisans hand-sketch intricate motifs inspired by Mughal jalis, sacred lotus blooms, and Kashi's temple architecture.</p>
             </div>
           </div>
           <div class="craft-step reveal-right">
             <div class="step-number">02</div>
             <div class="step-content">
-              <h4>Silk & Zari Selection</h4>
-              <p>Only the finest mulberry silk and authentic gold & silver zari threads are chosen — tested for purity and lustre.</p>
+              <h4 data-i18n="step2.title">Silk & Zari Selection</h4>
+              <p data-i18n="step2.desc">Only the finest mulberry silk and authentic gold & silver zari threads are chosen — tested for purity and lustre.</p>
             </div>
           </div>
           <div class="craft-step reveal-right">
             <div class="step-number">03</div>
             <div class="step-content">
-              <h4>Dyeing & Warping</h4>
-              <p>Natural and heritage dyes infuse the silk with deep, lasting colors before the warp threads are carefully prepared.</p>
+              <h4 data-i18n="step3.title">Dyeing & Warping</h4>
+              <p data-i18n="step3.desc">Natural and heritage dyes infuse the silk with deep, lasting colors before the warp threads are carefully prepared.</p>
             </div>
           </div>
           <div class="craft-step reveal-right">
             <div class="step-number">04</div>
             <div class="step-content">
-              <h4>Handloom Weaving</h4>
-              <p>Each saree takes 15 to 30 days of dedicated handloom weaving — every knot, every thread placed with precision and love.</p>
+              <h4 data-i18n="step4.title">Handloom Weaving</h4>
+              <p data-i18n="step4.desc">Each saree takes 15 to 30 days of dedicated handloom weaving — every knot, every thread placed with precision and love.</p>
             </div>
           </div>
           <div class="craft-step reveal-right">
             <div class="step-number">05</div>
             <div class="step-content">
-              <h4>Finishing & Quality</h4>
-              <p>Rigorous quality inspection ensures every saree meets the exacting standards of Banarasi Sanskriti before reaching you.</p>
+              <h4 data-i18n="step5.title">Finishing & Quality</h4>
+              <p data-i18n="step5.desc">Rigorous quality inspection ensures every saree meets the exacting standards of Banarasi Sanskriti before reaching you.</p>
             </div>
           </div>
         </div>
@@ -302,49 +313,49 @@
   <section class="specifications section-padding" id="specifications">
     <div class="container">
       <div class="text-center reveal">
-        <p class="section-subtitle">Know Your Saree</p>
-        <h2 class="section-title">Saree <span class="gold-text">Specifications</span></h2>
+        <p class="section-subtitle" data-i18n="specs.subtitle">Know Your Saree</p>
+        <h2 class="section-title" data-i18n-html="specs.title">Saree <span class="gold-text">Specifications</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
       </div>
       <div class="specs-grid">
         <div class="spec-card reveal">
           <div class="spec-icon"><i class="fas fa-scroll"></i></div>
-          <h3>Fabric Type</h3>
-          <p>High-grade <strong>mulberry silk</strong> is the standard. Quality is measured by the <em>"ply"</em> (twist) of the thread, which determines the fabric's weight, texture, and longevity.</p>
+          <h3 data-i18n="spec1.title">Fabric Type</h3>
+          <p data-i18n-html="spec1.desc">High-grade <strong>mulberry silk</strong> is the standard. Quality is measured by the <em>"ply"</em> (twist) of the thread, which determines the fabric's weight, texture, and longevity.</p>
         </div>
         <div class="spec-card reveal">
           <div class="spec-icon"><i class="fas fa-gem"></i></div>
-          <h3>Zari Types</h3>
+          <h3 data-i18n="spec2.title">Zari Types</h3>
           <div class="zari-types">
             <div class="zari-item">
-              <span class="zari-label">Real Zari</span>
-              <span class="zari-desc">Silver & gold threads — the highest investment & most precious</span>
+              <span class="zari-label" data-i18n="zari.real">Real Zari</span>
+              <span class="zari-desc" data-i18n="zari.real-desc">Silver & gold threads — the highest investment & most precious</span>
             </div>
             <div class="zari-item">
-              <span class="zari-label">Tested Zari</span>
-              <span class="zari-desc">Copper wire with electroplating — excellent shine, standard choice</span>
+              <span class="zari-label" data-i18n="zari.tested">Tested Zari</span>
+              <span class="zari-desc" data-i18n="zari.tested-desc">Copper wire with electroplating — excellent shine, standard choice</span>
             </div>
           </div>
         </div>
         <div class="spec-card spec-card-wide reveal">
           <div class="spec-icon"><i class="fas fa-paint-brush"></i></div>
-          <h3>Signature Patterns — Butis & Jals</h3>
+          <h3 data-i18n="spec3.title">Signature Patterns — Butis & Jals</h3>
           <div class="patterns-grid">
             <div class="pattern-item">
-              <span class="pattern-name">Jhallar</span>
-              <span class="pattern-desc">Intricate, interlocking floral borders</span>
+              <span class="pattern-name" data-i18n="pattern.jhallar">Jhallar</span>
+              <span class="pattern-desc" data-i18n="pattern.jhallar-desc">Intricate, interlocking floral borders</span>
             </div>
             <div class="pattern-item">
-              <span class="pattern-name">Bel</span>
-              <span class="pattern-desc">Creepers and vine-like scrolls</span>
+              <span class="pattern-name" data-i18n="pattern.bel">Bel</span>
+              <span class="pattern-desc" data-i18n="pattern.bel-desc">Creepers and vine-like scrolls</span>
             </div>
             <div class="pattern-item">
-              <span class="pattern-name">Shikargah</span>
-              <span class="pattern-desc">Hunting scenes — lions, deer, birds — the pinnacle of weaving skill</span>
+              <span class="pattern-name" data-i18n="pattern.shikargah">Shikargah</span>
+              <span class="pattern-desc" data-i18n="pattern.shikargah-desc">Hunting scenes — lions, deer, birds — the pinnacle of weaving skill</span>
             </div>
             <div class="pattern-item">
-              <span class="pattern-name">Mughal Motifs</span>
-              <span class="pattern-desc">Persian-influenced florals like the Asharfi (coin) & Paan (leaf)</span>
+              <span class="pattern-name" data-i18n="pattern.mughal">Mughal Motifs</span>
+              <span class="pattern-desc" data-i18n="pattern.mughal-desc">Persian-influenced florals like the Asharfi (coin) & Paan (leaf)</span>
             </div>
           </div>
         </div>
@@ -356,31 +367,31 @@
   <section class="testimonials section-padding" id="testimonials">
     <div class="container">
       <div class="text-center reveal">
-        <p class="section-subtitle">Cherished by Many</p>
-        <h2 class="section-title">Words of <span class="gold-text">Grace</span></h2>
+        <p class="section-subtitle" data-i18n="testimonials.subtitle">Cherished by Many</p>
+        <h2 class="section-title" data-i18n-html="testimonials.title">Words of <span class="gold-text">Grace</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
       </div>
       <div class="testimonial-carousel reveal">
         <div class="testimonial-track" id="testimonialTrack">
           <div class="testimonial-slide">
-            <p class="testimonial-quote">The Katan silk saree I received was nothing short of extraordinary. The zari work was impeccable, and wearing it felt like draping a piece of living history. Banarasi Sanskriti truly honours the art of Banaras.</p>
-            <p class="testimonial-author">Priya Sharma</p>
-            <p class="testimonial-location">New Delhi</p>
+            <p class="testimonial-quote" data-i18n="testimonial1.quote">The Katan silk saree I received was nothing short of extraordinary. The zari work was impeccable, and wearing it felt like draping a piece of living history. Banarasi Sanskriti truly honours the art of Banaras.</p>
+            <p class="testimonial-author" data-i18n="testimonial1.author">Priya Sharma</p>
+            <p class="testimonial-location" data-i18n="testimonial1.location">New Delhi</p>
           </div>
           <div class="testimonial-slide">
-            <p class="testimonial-quote">I ordered a bridal saree for my daughter's wedding and was moved to tears when I saw it. The craftsmanship, the weight of the silk, the shimmer of real zari — it was a dream woven into fabric.</p>
-            <p class="testimonial-author">Meera Devi</p>
-            <p class="testimonial-location">Lucknow</p>
+            <p class="testimonial-quote" data-i18n="testimonial2.quote">I ordered a bridal saree for my daughter's wedding and was moved to tears when I saw it. The craftsmanship, the weight of the silk, the shimmer of real zari — it was a dream woven into fabric.</p>
+            <p class="testimonial-author" data-i18n="testimonial2.author">Meera Devi</p>
+            <p class="testimonial-location" data-i18n="testimonial2.location">Lucknow</p>
           </div>
           <div class="testimonial-slide">
-            <p class="testimonial-quote">What sets Banarasi Sanskriti apart is their commitment to authenticity. In a market flooded with machine-made imitations, their handwoven sarees are a breath of fresh air. Absolutely worth every rupee.</p>
-            <p class="testimonial-author">Ananya Iyer</p>
-            <p class="testimonial-location">Mumbai</p>
+            <p class="testimonial-quote" data-i18n="testimonial3.quote">What sets Banarasi Sanskriti apart is their commitment to authenticity. In a market flooded with machine-made imitations, their handwoven sarees are a breath of fresh air. Absolutely worth every rupee.</p>
+            <p class="testimonial-author" data-i18n="testimonial3.author">Ananya Iyer</p>
+            <p class="testimonial-location" data-i18n="testimonial3.location">Mumbai</p>
           </div>
           <div class="testimonial-slide">
-            <p class="testimonial-quote">From the moment I draped the tissue silk saree, I could feel the difference. The sheer elegance and the way it catches light is magical. I've become a loyal patron of this beautiful brand.</p>
-            <p class="testimonial-author">Kavita Reddy</p>
-            <p class="testimonial-location">Hyderabad</p>
+            <p class="testimonial-quote" data-i18n="testimonial4.quote">From the moment I draped the tissue silk saree, I could feel the difference. The sheer elegance and the way it catches light is magical. I've become a loyal patron of this beautiful brand.</p>
+            <p class="testimonial-author" data-i18n="testimonial4.author">Kavita Reddy</p>
+            <p class="testimonial-location" data-i18n="testimonial4.location">Hyderabad</p>
           </div>
         </div>
         <div class="carousel-nav" id="carouselNav"></div>
@@ -392,8 +403,8 @@
   <section class="team section-padding" id="team">
     <div class="container">
       <div class="text-center reveal">
-        <p class="section-subtitle">The Minds Behind the Loom</p>
-        <h2 class="section-title">Our Leadership <span class="gold-text">Team</span></h2>
+        <p class="section-subtitle" data-i18n="team.subtitle">The Minds Behind the Loom</p>
+        <h2 class="section-title" data-i18n-html="team.title">Our Leadership <span class="gold-text">Team</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
       </div>
       <div class="team-grid">
@@ -403,9 +414,9 @@
             <img src="assets/images/team/bandana.jpg" alt="Mrs. Bandana Chaubey" loading="lazy">
           </div>
           <div class="team-info">
-            <h3 class="team-name">Mrs. Bandana Chaubey</h3>
-            <p class="team-role">Director</p>
-            <p class="team-desc">With over three decades of mastering the intricate dynamics of managing a large, bustling 20-member household, Mrs. Bandana Chaubey brings unparalleled foundational leadership, patience, and operational wisdom to the brand. Her lifelong exposure to cultural traditions has gifted her an intuitive and profound understanding of premium fabrics. Fluent and deeply expressive in both Hindi and Bengali, she grounds the brand in authentic cultural values and ensures that our storytelling remains deeply connected to our roots.</p>
+            <h3 class="team-name" data-i18n="team1.name">Mrs. Bandana Chaubey</h3>
+            <p class="team-role" data-i18n="team1.role">Director</p>
+            <p class="team-desc" data-i18n="team1.desc">With over three decades of mastering the intricate dynamics of managing a large, bustling 20-member household, Mrs. Bandana Chaubey brings unparalleled foundational leadership, patience, and operational wisdom to the brand. Her lifelong exposure to cultural traditions has gifted her an intuitive and profound understanding of premium fabrics. Fluent and deeply expressive in both Hindi and Bengali, she grounds the brand in authentic cultural values and ensures that our storytelling remains deeply connected to our roots.</p>
           </div>
         </div>
         <!-- Team Member 2 -->
@@ -414,9 +425,9 @@
             <img src="assets/images/team/shubham.png" alt="Mr. Shubham Chaubey" loading="lazy">
           </div>
           <div class="team-info">
-            <h3 class="team-name">Mr. Shubham Chaubey</h3>
-            <p class="team-role">Managing Director</p>
-            <p class="team-desc">Born and raised in the sacred lanes of Varanasi, Shubham’s connection to the loom is personal and lifelong. He possesses a comprehensive, ground-level command over fabric quality, weaver ecosystems, and regional vendor networks. Shubham pairs this deep-rooted traditional knowledge with a highly sophisticated global perspective. A Hospitality graduate, he holds a dual Master’s degree—his first in Marketing Management from India and his second in International Business from the United Arab Emirates—enabling him to seamlessly scale this rich Indian heritage onto the international stage.</p>
+            <h3 class="team-name" data-i18n="team2.name">Mr. Shubham Chaubey</h3>
+            <p class="team-role" data-i18n="team2.role">Managing Director</p>
+            <p class="team-desc" data-i18n="team2.desc">Born and raised in the sacred lanes of Varanasi, Shubham’s connection to the loom is personal and lifelong. He possesses a comprehensive, ground-level command over fabric quality, weaver ecosystems, and regional vendor networks. Shubham pairs this deep-rooted traditional knowledge with a highly sophisticated global perspective. A Hospitality graduate, he holds a dual Master’s degree—his first in Marketing Management from India and his second in International Business from the United Arab Emirates—enabling him to seamlessly scale this rich Indian heritage onto the international stage.</p>
           </div>
         </div>
         <!-- Team Member 3 -->
@@ -425,9 +436,9 @@
             <img src="assets/images/team/bhavana.jpg" alt="Mrs. Bhavana Chaubey" loading="lazy">
           </div>
           <div class="team-info">
-            <h3 class="team-name">Mrs. Bhavana Chaubey</h3>
-            <p class="team-role">Director of Product & Heritage Sourcing</p>
-            <p class="team-desc">Belonging to a prominent legacy family in the Banarasi saree industry, Bhavana has textiles running through her veins. Her parental business stands as a premier foundational supplier of high-end sarees to major showrooms and elite corporate merchants across various states of India, with a highly specialized stronghold in the South Indian market. Holding a Master’s degree in Finance, she brilliantly marries fiscal precision with an unmatched eye for design, quality, and wholesale sourcing strategy.</p>
+            <h3 class="team-name" data-i18n="team3.name">Mrs. Bhavana Chaubey</h3>
+            <p class="team-role" data-i18n="team3.role">Director of Product & Heritage Sourcing</p>
+            <p class="team-desc" data-i18n="team3.desc">Belonging to a prominent legacy family in the Banarasi saree industry, Bhavana has textiles running through her veins. Her parental business stands as a premier foundational supplier of high-end sarees to major showrooms and elite corporate merchants across various states of India, with a highly specialized stronghold in the South Indian market. Holding a Master’s degree in Finance, she brilliantly marries fiscal precision with an unmatched eye for design, quality, and wholesale sourcing strategy.</p>
           </div>
         </div>
         <!-- Team Member 4 -->
@@ -436,9 +447,9 @@
             <img src="assets/images/team/anurag.jpg" alt="Mr. Anurag" loading="lazy">
           </div>
           <div class="team-info">
-            <h3 class="team-name">Mr. Anurag</h3>
-            <p class="team-role">Operations Coordinator</p>
-            <p class="team-desc">The operational engine of our day-to-day workflow, Anurag manages the logistical and production lifelines of the brand. From coordinating directly with the weavers to supervising final quality checks and managing distribution, he ensures that the artistry of Varanasi reaches your doorstep with absolute perfection and care.</p>
+            <h3 class="team-name" data-i18n="team4.name">Mr. Anurag</h3>
+            <p class="team-role" data-i18n="team4.role">Operations Coordinator</p>
+            <p class="team-desc" data-i18n="team4.desc">The operational engine of our day-to-day workflow, Anurag manages the logistical and production lifelines of the brand. From coordinating directly with the weavers to supervising final quality checks and managing distribution, he ensures that the artistry of Varanasi reaches your doorstep with absolute perfection and care.</p>
           </div>
         </div>
       </div>
@@ -449,11 +460,11 @@
   <section class="essence section-padding" id="essence">
     <div class="container">
       <div class="essence-content text-center reveal">
-        <p class="section-subtitle" style="color: var(--color-accent-light);">Our Philosophy</p>
-        <h2 class="section-title" style="color: #fff;">The Essence of <span class="gold-text">Our Craft</span></h2>
+        <p class="section-subtitle" style="color: var(--color-accent-light);" data-i18n="essence.subtitle">Our Philosophy</p>
+        <h2 class="section-title" style="color: #fff;" data-i18n-html="essence.title">The Essence of <span class="gold-text">Our Craft</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
-        <p class="essence-lead">At Banarasi Sanskriti, we don't just sell apparel; we pass on an heirloom.</p>
-        <p class="essence-text">Every thread we source tells a story of patience, every pattern reflects centuries of cultural evolution, and every garment honors the master weavers who keep this magnificent craft alive. Thank you for being a part of our story and carrying forward the legacy of authentic Indian heritage.</p>
+        <p class="essence-lead" data-i18n="essence.lead">At Banarasi Sanskriti, we don't just sell apparel; we pass on an heirloom.</p>
+        <p class="essence-text" data-i18n="essence.text">Every thread we source tells a story of patience, every pattern reflects centuries of cultural evolution, and every garment honors the master weavers who keep this magnificent craft alive. Thank you for being a part of our story and carrying forward the legacy of authentic Indian heritage.</p>
       </div>
     </div>
   </section>
@@ -462,36 +473,36 @@
   <section class="contact section-padding" id="contact">
     <div class="container">
       <div class="text-center reveal">
-        <p class="section-subtitle" style="color:var(--color-accent-light)">We'd Love to Hear From You</p>
-        <h2 class="section-title">Visit Our <span class="gold-text">Atelier</span></h2>
+        <p class="section-subtitle" style="color:var(--color-accent-light)" data-i18n="contact.subtitle">We'd Love to Hear From You</p>
+        <h2 class="section-title" data-i18n-html="contact.title">Visit Our <span class="gold-text">Atelier</span></h2>
         <div class="ornament"><span class="ornament-icon">✦</span></div>
       </div>
       <div class="contact-grid">
         <div class="contact-info reveal-left">
-          <h3>Banarasi Sanskriti</h3>
-          <p>Step into our world of handwoven luxury. Whether you seek the perfect bridal saree or wish to explore our curated collections, we are here to guide you through every thread of your journey.</p>
+          <h3 data-i18n="contact.info.title">Banarasi Sanskriti</h3>
+          <p data-i18n="contact.info.p">Step into our world of handwoven luxury. Whether you seek the perfect bridal saree or wish to explore our curated collections, we are here to guide you through every thread of your journey.</p>
           <div class="contact-detail" style="align-items: flex-start;">
             <i class="fas fa-map-marker-alt" style="margin-top: 4px;"></i>
             <div>
-              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Varanasi Atelier:</strong><br>
-              <span>Chowk, Varanasi, Uttar Pradesh 221001, India</span>
+              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="contact.varanasi-label">Varanasi Atelier:</strong><br>
+              <span data-i18n="contact.varanasi-addr">Chowk, Varanasi, Uttar Pradesh 221001, India</span>
               <br><br>
-              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">UAE Office:</strong><br>
-              <span>FZE Business Center, Sharjah Publishing City Free Zone, Sharjah, United Arab Emirates</span>
+              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="contact.uae-label">UAE Office:</strong><br>
+              <span data-i18n="contact.uae-addr">FZE Business Center, Sharjah Publishing City Free Zone, Sharjah, United Arab Emirates</span>
             </div>
           </div>
           <div class="contact-detail" style="align-items: flex-start;">
             <i class="fas fa-phone-alt" style="margin-top: 4px;"></i>
             <div>
-              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">India:</strong> <span>+91 77549 25771</span><br>
-              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">UAE:</strong> <span>+971 55 440 5896</span>
+              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="contact.india-label">India:</strong> <span>+91 77549 25771</span><br>
+              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="contact.uae-phone-label">UAE:</strong> <span>+971 55 440 5896</span>
             </div>
           </div>
           <div class="contact-detail" style="align-items: flex-start;">
             <i class="fas fa-globe" style="margin-top: 4px;"></i>
             <div>
-              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Global Exports:</strong><br>
-              <span>Proudly exporting our premium handwoven heritage to the GCC and Africa Regions.</span>
+              <strong style="color: var(--color-accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="contact.exports-label">Global Exports:</strong><br>
+              <span data-i18n="contact.exports-text">Proudly exporting our premium handwoven heritage to the GCC and Africa Regions.</span>
             </div>
           </div>
           <div class="contact-detail">
@@ -511,18 +522,18 @@
         </div>
         <form class="contact-form reveal-right" id="contactForm">
           <div class="form-group">
-            <input type="text" id="form-name" placeholder="Your Name" required>
+            <input type="text" id="form-name" placeholder="Your Name" data-i18n-placeholder="contact.placeholder.name" required>
           </div>
           <div class="form-group">
-            <input type="email" id="form-email" placeholder="Email Address" required>
+            <input type="email" id="form-email" placeholder="Email Address" data-i18n-placeholder="contact.placeholder.email" required>
           </div>
           <div class="form-group">
-            <input type="tel" id="form-phone" placeholder="Phone Number">
+            <input type="tel" id="form-phone" placeholder="Phone Number" data-i18n-placeholder="contact.placeholder.phone">
           </div>
           <div class="form-group">
-            <textarea id="form-message" placeholder="Tell us what you're looking for..." rows="5" required></textarea>
+            <textarea id="form-message" placeholder="Tell us what you're looking for..." data-i18n-placeholder="contact.placeholder.message" rows="5" required></textarea>
           </div>
-          <button type="submit" class="submit-btn" id="submit-btn">Send Enquiry</button>
+          <button type="submit" class="submit-btn" id="submit-btn" data-i18n="contact.submit">Send Enquiry</button>
         </form>
       </div>
     </div>
@@ -533,16 +544,17 @@
     <div class="container">
       <div class="footer-content">
         <a href="#hero" class="footer-brand"><img src="assets/images/logo.png" alt="Banarasi Sanskriti" class="footer-logo"></a>
-        <p class="footer-text">&copy; 2026 Banarasi Sanskriti. All rights reserved. Handwoven with love in Varanasi.</p>
+        <p class="footer-text" data-i18n="footer.text">&copy; 2026 Banarasi Sanskriti. All rights reserved. Handwoven with love in Varanasi.</p>
         <div class="footer-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Shipping</a>
+          <a href="#" data-i18n="footer.privacy">Privacy</a>
+          <a href="#" data-i18n="footer.terms">Terms</a>
+          <a href="#" data-i18n="footer.shipping">Shipping</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="script.js?v=7"></script>
 </body>
 </html>

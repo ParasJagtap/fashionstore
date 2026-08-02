@@ -2,44 +2,59 @@ document.addEventListener('DOMContentLoaded', () => {
   // Collection data map (same as index, ideally we'd share this via a module but keeping it simple)
   const collectionData = {
     katan: {
-      badge: 'The Sedan',
-      title: 'Katan Silk',
-      desc: 'The Katan is the gold standard of Banarasi sarees — pure silk, durable, and timelessly classic. Created by twisting pure silk threads together to form a firm, resilient fabric, the Katan is built to last generations.',
-      fabric: 'Pure Mulberry Silk',
-      weave: 'Plain weave with Kadwa technique',
-      occasion: 'Weddings, Pujas, Grand Celebrations'
+      badge: { en: 'The Sedan', ar: 'السيارات الصالون (السيدان)' },
+      title: { en: 'Katan Silk', ar: 'حرير كتان' },
+      desc: {
+        en: 'The Katan is the gold standard of Banarasi sarees — pure silk, durable, and timelessly classic. Created by twisting pure silk threads together to form a firm, resilient fabric, the Katan is built to last generations.',
+        ar: 'حرير الكتان هو المعيار الذهبي لساريات بنارسي — حرير خالص، متين، وكلاسيكي خالٍ من الزمن. يتم إنتاجه بليّ خيوط الحرير الخالص معاً لتشكيل قماش متين وقوي يدوم لأجيال.'
+      },
+      fabric: { en: 'Pure Mulberry Silk', ar: 'حرير التوت الخالص' },
+      weave: { en: 'Plain weave with Kadwa technique', ar: 'نسيج عادي بتقنية كادوا' },
+      occasion: { en: 'Weddings, Pujas, Grand Celebrations', ar: 'الأعراس، المناسبات الكبرى' }
     },
     organza: {
-      badge: 'The Convertible',
-      title: 'Organza (Kora) with Zari',
-      desc: 'The Organza Kora is a masterpiece of contrasts — a featherlight, sheer body meets rich gold or silver zari borders for an effect that is both ethereal and opulent.',
-      fabric: 'Kora (stiff organza silk)',
-      weave: 'Open weave with heavy border Zari',
-      occasion: 'Receptions, Festive Gatherings'
+      badge: { en: 'The Convertible', ar: 'الأخف وزناً' },
+      title: { en: 'Organza (Kora) with Zari', ar: 'أورغانزا (كورا) مع زاري' },
+      desc: {
+        en: 'The Organza Kora is a masterpiece of contrasts — a featherlight, sheer body meets rich gold or silver zari borders for an effect that is both ethereal and opulent.',
+        ar: 'أورغانزا كورا هي تحفة من التناقضات — جسم شفاف خفيف كالأثير يلتصق بحدود زاري ذهبية أو فضية غنية لمظهر ينبض بالفخامة.'
+      },
+      fabric: { en: 'Kora (stiff organza silk)', ar: 'حرير أورغانزا كورا' },
+      weave: { en: 'Open weave with heavy border Zari', ar: 'نسيج مفتوح مع زاري فاخر على الحدود' },
+      occasion: { en: 'Receptions, Festive Gatherings', ar: 'حفلات الاستقبال، الأمسيات الاحتفالية' }
     },
     georgette: {
-      badge: 'The Sport Model',
-      title: 'Georgette',
-      desc: 'The Georgette is for the modern woman who values elegance without compromise. Made from crepe yarn, it offers unmatched fluidity and a beautiful drape that moves with you.',
-      fabric: 'Crepe yarn',
-      weave: 'Crinkled plain weave with Zari',
-      occasion: 'Office Events, Casual Celebrations'
+      badge: { en: 'The Sport Model', ar: 'النموذج العصري' },
+      title: { en: 'Georgette', ar: 'جورجيت' },
+      desc: {
+        en: 'The Georgette is for the modern woman who values elegance without compromise. Made from crepe yarn, it offers unmatched fluidity and a beautiful drape that moves with you.',
+        ar: 'الجورجيت صُمم للمرأة المعاصرة التي تقدّر الأناقة دون مساومة. مصنوع من خيوط الكريب، ويوفر انسيابية فائقة وسهولة في الارتداء.'
+      },
+      fabric: { en: 'Crepe yarn', ar: 'خيط الكريب' },
+      weave: { en: 'Crinkled plain weave with Zari', ar: 'نسيج مجعد مع زاري' },
+      occasion: { en: 'Office Events, Casual Celebrations', ar: 'المناسبات الرسمية والعصرية' }
     },
     shattir: {
-      badge: 'The Daily Driver',
-      title: 'Shattir',
-      desc: 'The Shattir is your everyday companion — the most accessible version of the Banarasi weave that doesn\'t sacrifice charm. Simplified patterns and lighter construction.',
-      fabric: 'Silk blend with lighter thread count',
-      weave: 'Simplified Banarasi weave',
-      occasion: 'Daily Wear, Small Gatherings'
+      badge: { en: 'The Daily Driver', ar: 'الرفيق اليومي' },
+      title: { en: 'Shattir', ar: 'شاتير' },
+      desc: {
+        en: 'The Shattir is your everyday companion — the most accessible version of the Banarasi weave that doesn\'t sacrifice charm. Simplified patterns and lighter construction.',
+        ar: 'شاتير هو رفيقك اليومي — الإصدار الأكثر سهولة ومرونة من نسيج بنارسي دون التضحية بالجمال والجاذبية.'
+      },
+      fabric: { en: 'Silk blend with lighter thread count', ar: 'مزيج الحرير بخيوط خفيفة' },
+      weave: { en: 'Simplified Banarasi weave', ar: 'نسيج بنارسي مبسط' },
+      occasion: { en: 'Daily Wear, Small Gatherings', ar: 'الارتداء اليومي، التجمعات البسيطة' }
     },
     abaya: {
-      badge: 'New Collection Drop',
-      title: 'Luxury Abaya',
-      desc: 'A fusion of Banarasi heritage and UAE modernity — our Luxury Abaya collection brings the timeless artistry of handwoven Banarasi craftsmanship to contemporary silhouettes designed for the discerning modern woman.',
-      fabric: 'Premium Banarasi Silk & Blends',
-      weave: 'Handwoven Banarasi Zari work',
-      occasion: 'Everyday Luxury, Formal Events, Eid'
+      badge: { en: 'New Collection Drop', ar: 'إطلاق مجموعة جديدة' },
+      title: { en: 'Luxury Abaya', ar: 'عباءة فاخرة' },
+      desc: {
+        en: 'A fusion of Banarasi heritage and UAE modernity — our Luxury Abaya collection brings the timeless artistry of handwoven Banarasi craftsmanship to contemporary silhouettes designed for the discerning modern woman.',
+        ar: 'مزج رائع بين التراث البنارسي والحداثة الإماراتي — تقدم مجموعة العباءة الفاخرة حرفية النسيج اليدوي البنارسي الأصيل بتصاميم معاصرة.'
+      },
+      fabric: { en: 'Premium Banarasi Silk & Blends', ar: 'حرير بنارسي فاخر ومزيج متميز' },
+      weave: { en: 'Handwoven Banarasi Zari work', ar: 'عمل زاري بنارسي منسوج يدوياً' },
+      occasion: { en: 'Everyday Luxury, Formal Events, Eid', ar: 'الفخامة اليومية، المناسبات الرسمية، الأعياد' }
     }
   };
 
@@ -53,9 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const getLang = () => document.documentElement.lang || 'en';
+
   // Populate data if type exists
   if (type && collectionData[type]) {
     const data = collectionData[type];
+    const lang = getLang();
     const badgeEl = document.getElementById('showroomBadge');
     const titleEl = document.getElementById('showroomTitle');
     const descEl = document.getElementById('showroomDesc');
@@ -63,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const weaveEl = document.getElementById('showroomWeave');
     const occasionEl = document.getElementById('showroomOccasion');
 
-    if(badgeEl) badgeEl.textContent = data.badge;
-    if(titleEl) titleEl.textContent = data.title;
-    if(descEl) descEl.textContent = data.desc;
-    if(fabricEl) fabricEl.textContent = data.fabric;
-    if(weaveEl) weaveEl.textContent = data.weave;
-    if(occasionEl) occasionEl.textContent = data.occasion;
+    if(badgeEl) badgeEl.textContent = typeof data.badge === 'object' ? data.badge[lang] || data.badge.en : data.badge;
+    if(titleEl) titleEl.textContent = typeof data.title === 'object' ? data.title[lang] || data.title.en : data.title;
+    if(descEl) descEl.textContent = typeof data.desc === 'object' ? data.desc[lang] || data.desc.en : data.desc;
+    if(fabricEl) fabricEl.textContent = typeof data.fabric === 'object' ? data.fabric[lang] || data.fabric.en : data.fabric;
+    if(weaveEl) weaveEl.textContent = typeof data.weave === 'object' ? data.weave[lang] || data.weave.en : data.weave;
+    if(occasionEl) occasionEl.textContent = typeof data.occasion === 'object' ? data.occasion[lang] || data.occasion.en : data.occasion;
 
     // Highlight active link in the sidebar
     const activeLink = document.querySelector(`.filter-link[data-type="${type}"]`);
@@ -188,8 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // 4. Render
       let gridHtml = '';
+      const lang = document.documentElement.lang || 'en';
       if (filtered.length === 0) {
-        gridHtml = '<p style="color:#fff; padding: 40px;">No masterpieces match your current selection.</p>';
+        gridHtml = `<p style="color:#fff; padding: 40px;">${lang === 'ar' ? 'لا تتوفر قطع تطابق اختيارك الحالي.' : 'No masterpieces match your current selection.'}</p>`;
       } else {
         filtered.forEach(p => {
           gridHtml += `
@@ -213,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Update results count
       const toolbarResults = document.querySelector('.toolbar-results');
       if (toolbarResults) {
-        toolbarResults.textContent = `Showing ${filtered.length} masterpieces`;
+        toolbarResults.textContent = lang === 'ar' ? `عرض ${filtered.length} قطع رائعة` : `Showing ${filtered.length} masterpieces`;
       }
     };
 
@@ -274,10 +293,15 @@ document.addEventListener('DOMContentLoaded', () => {
         modalSpecsView.style.display = 'none';
         modalFormView.style.display = 'block';
         
-        // Pre-fill message field
+        // Pre-fill message field based on language
         const messageField = document.getElementById('modal-form-message');
         if (messageField) {
-          messageField.value = `Namaste, I am interested in acquiring the "${activeProduct.title}" saree from the ${activeProduct.collectionType || ''} collection (Color: ${activeProduct.colorFamily || '-'}, Pattern: ${activeProduct.pattern || '-'}). Please share pricing and availability.`;
+          const lang = document.documentElement.lang || 'en';
+          if (lang === 'ar') {
+            messageField.value = `مرحباً، أنا مهتم باقتناء قطة "${activeProduct.title}" من مجموعة ${activeProduct.collectionType || ''} (اللون: ${activeProduct.colorFamily || '-'}، النمط: ${activeProduct.pattern || '-'}). يرجى تزويدي بالأسعار وإمكانية التوفر.`;
+          } else {
+            messageField.value = `Namaste, I am interested in acquiring the "${activeProduct.title}" saree from the ${activeProduct.collectionType || ''} collection (Color: ${activeProduct.colorFamily || '-'}, Pattern: ${activeProduct.pattern || '-'}). Please share pricing and availability.`;
+          }
         }
       });
     }

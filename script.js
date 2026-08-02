@@ -390,3 +390,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// Language switcher toggle for mobile
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.getElementById('langToggle');
+  if (toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var li = toggle.closest('.lang-switcher');
+      if (li) li.classList.toggle('open');
+    });
+    document.addEventListener('click', function() {
+      var li = toggle.closest('.lang-switcher');
+      if (li) li.classList.remove('open');
+    });
+  }
+});

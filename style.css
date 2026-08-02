@@ -1785,3 +1785,112 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .catalog-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
   .showroom-specs { gap: 20px; flex-direction: column; }
 }
+
+/* =============================================
+   LANGUAGE SWITCHER
+   ============================================= */
+.lang-switcher {
+  position: relative;
+  list-style: none;
+}
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(196,160,90,0.15);
+  border: 1px solid rgba(196,160,90,0.35);
+  color: var(--color-accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.3s, border-color 0.3s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.lang-toggle:hover {
+  background: rgba(196,160,90,0.28);
+  border-color: var(--color-accent);
+}
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #1a1408;
+  border: 1px solid rgba(196,160,90,0.3);
+  border-radius: 8px;
+  min-width: 150px;
+  padding: 6px 0;
+  z-index: 9999;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  list-style: none;
+}
+.lang-switcher:hover .lang-dropdown,
+.lang-switcher:focus-within .lang-dropdown {
+  display: block;
+}
+.lang-dropdown li { list-style: none; }
+.lang-option {
+  display: block;
+  padding: 9px 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.lang-option:hover, .lang-option.active {
+  color: var(--color-accent);
+  background: rgba(196,160,90,0.1);
+}
+
+/* =============================================
+   RTL OVERRIDES (Arabic)
+   ============================================= */
+[dir="rtl"] body {
+  font-family: 'Cairo', 'Playfair Display', serif;
+}
+[dir="rtl"] .nav-links { flex-direction: row-reverse; }
+[dir="rtl"] .nav-brand { margin-right: 0; margin-left: auto; }
+[dir="rtl"] .hamburger { margin-right: auto; margin-left: 0; }
+[dir="rtl"] .hero-content { text-align: right; }
+[dir="rtl"] .hero-tagline, [dir="rtl"] .hero-slogan, [dir="rtl"] .hero-export-note { text-align: right; }
+[dir="rtl"] .ornament { justify-content: flex-end; }
+[dir="rtl"] .ornament[style*="justify-content:flex-start"] { justify-content: flex-start !important; }
+[dir="rtl"] .hero-content .ornament { justify-content: center; }
+[dir="rtl"] .abaya-banner-content { flex-direction: row-reverse; }
+[dir="rtl"] .abaya-left, [dir="rtl"] .abaya-right { text-align: right; }
+[dir="rtl"] .heritage-content p, [dir="rtl"] .about-content p { text-align: right; }
+[dir="rtl"] .section-subtitle, [dir="rtl"] .section-title { text-align: right; }
+[dir="rtl"] .text-center .section-subtitle, [dir="rtl"] .text-center .section-title { text-align: center; }
+[dir="rtl"] .heritage-stats { direction: rtl; }
+[dir="rtl"] .craft-steps { direction: rtl; }
+[dir="rtl"] .step-content h4, [dir="rtl"] .step-content p { text-align: right; }
+[dir="rtl"] .craft-step { flex-direction: row-reverse; }
+[dir="rtl"] .contact-detail { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .contact-detail div { text-align: right; }
+[dir="rtl"] .contact-info h3, [dir="rtl"] .contact-info p { text-align: right; }
+[dir="rtl"] .team-info { text-align: right; }
+[dir="rtl"] .collection-card-overlay { text-align: right; }
+[dir="rtl"] .spec-card { text-align: right; }
+[dir="rtl"] .zari-types, [dir="rtl"] .patterns-grid { direction: rtl; }
+[dir="rtl"] .footer-content { direction: rtl; }
+[dir="rtl"] .footer-links { direction: rtl; }
+[dir="rtl"] .testimonial-quote, [dir="rtl"] .testimonial-author, [dir="rtl"] .testimonial-location { text-align: right; }
+[dir="rtl"] .essence-content { direction: rtl; text-align: right; }
+[dir="rtl"] .essence-content .section-title, [dir="rtl"] .essence-content .ornament { text-align: center; justify-content: center; }
+[dir="rtl"] .gaadi-intro { text-align: center; }
+[dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+[dir="rtl"] .contact-hours { text-align: right; }
+
+@media (max-width: 768px) {
+  [dir="rtl"] .nav-links { flex-direction: column; }
+  [dir="rtl"] .lang-dropdown { left: 0; right: auto; }
+  .lang-switcher { margin-top: 8px; }
+}
+
+/* Mobile lang dropdown open state */
+.lang-switcher.open .lang-dropdown { display: block; }
