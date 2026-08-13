@@ -134,7 +134,7 @@ app.get('/api/products', async (req, res) => {
 });
 
 // API: Add new product
-app.post('/api/products', auth, upload.single('image'), async (req, res) => {
+app.post('/api/products', auth, upload.array('images', 5), async (req, res) => {
     try {
         const { title, desc, price, collectionType, colorFamily, priceRange, pattern } = req.body;
         
@@ -146,14 +146,23 @@ app.post('/api/products', auth, upload.single('image'), async (req, res) => {
         const pColor = colorFamily || 'Crimson Red';
         const pPriceRange = priceRange || '₹10,000 - ₹25,000';
         const pPattern = pattern || 'Floral Jaal';
-        const pImage = req.file ? `assets/images/catalog/${req.file.filename}` : 'assets/images/saree-bridal.png';
+        
+        // Handle multiple images
+        let pImages = [];
+        if (req.files && req.files.length > 0) {
+            pImages = req.files.map(file => `assets/images/catalog/${file.filename}`);
+        } else {
+            pImages = ['assets/images/saree-bridal.png'];
+        }
+        const pImage = pImages[0]; // fallback for legacy image column
+        const pImagesJson = JSON.stringify(pImages);
 
         const queryText = `
-            INSERT INTO products (id, title, "desc", price, "collectionType", "colorFamily", "priceRange", pattern, image)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            INSERT INTO products (id, title, "desc", price, "collectionType", "colorFamily", "priceRange", pattern, image, images)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
             RETURNING *
         `;
-        const { rows } = await pool.query(queryText, [id, pTitle, pDesc, pPrice, pCollection, pColor, pPriceRange, pPattern, pImage]);
+        const { rows } = await pool.query(queryText, [id, pTitle, pDesc, pPrice, pCollection, pColor, pPriceRange, pPattern, pImage, pImagesJson]);
 
         res.status(201).json({ message: 'Product added successfully', product: rows[0] });
     } catch (err) {
@@ -163,7 +172,7 @@ app.post('/api/products', auth, upload.single('image'), async (req, res) => {
 });
 
 // API: Update product
-app.put('/api/products/:id', auth, upload.single('image'), async (req, res) => {
+app.put('/api/products/:id', auth, upload.array('images', 5), async (req, res) => {
     try {
         const id = req.params.id;
         const { title, desc, price, collectionType, colorFamily, priceRange, pattern } = req.body;
@@ -182,15 +191,25 @@ app.put('/api/products/:id', auth, upload.single('image'), async (req, res) => {
         const pColor = colorFamily !== undefined ? colorFamily : existing.colorFamily;
         const pPriceRange = priceRange !== undefined ? priceRange : existing.priceRange;
         const pPattern = pattern !== undefined ? pattern : existing.pattern;
-        const pImage = req.file ? `assets/images/catalog/${req.file.filename}` : existing.image;
+        
+        let pImage, pImagesJson;
+        if (req.files && req.files.length > 0) {
+            const pImages = req.files.map(file => `assets/images/catalog/${file.filename}`);
+            pImage = pImages[0];
+            pImagesJson = JSON.stringify(pImages);
+        } else {
+            pImage = existing.image;
+            // Handle existing images if it's already an array, else fallback to just the single image
+            pImagesJson = JSON.stringify(existing.images || [existing.image]);
+        }
 
         const queryText = `
             UPDATE products
-            SET title = $2, "desc" = $3, price = $4, "collectionType" = $5, "colorFamily" = $6, "priceRange" = $7, pattern = $8, image = $9
+            SET title = $2, "desc" = $3, price = $4, "collectionType" = $5, "colorFamily" = $6, "priceRange" = $7, pattern = $8, image = $9, images = $10
             WHERE id = $1
             RETURNING *
         `;
-        const { rows } = await pool.query(queryText, [id, pTitle, pDesc, pPrice, pCollection, pColor, pPriceRange, pPattern, pImage]);
+        const { rows } = await pool.query(queryText, [id, pTitle, pDesc, pPrice, pCollection, pColor, pPriceRange, pPattern, pImage, pImagesJson]);
 
         res.json({ message: 'Product updated successfully', product: rows[0] });
     } catch (err) {

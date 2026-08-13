@@ -268,13 +268,107 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let activeProduct = null;
+    let currentImageIndex = 0;
+    let currentImages = [];
+
+    const sliderWrapper = document.getElementById('modalImagesWrapper');
+    const sliderPrev = document.getElementById('sliderPrev');
+    const sliderNext = document.getElementById('sliderNext');
+    const sliderDots = document.getElementById('sliderDots');
+
+    const updateSliderUI = () => {
+      // Update images
+      const imgs = sliderWrapper.querySelectorAll('img');
+      imgs.forEach((img, idx) => {
+        if (idx === currentImageIndex) {
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+      });
+      // Update dots
+      const dots = sliderDots.querySelectorAll('.slider-dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentImageIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    };
+
+    if (sliderPrev) sliderPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentImages.length <= 1) return;
+      currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+      updateSliderUI();
+    });
+
+    if (sliderNext) sliderNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentImages.length <= 1) return;
+      currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+      updateSliderUI();
+    });
 
     window.openModal = (id) => {
       // Find exact product (handle both string/int id matching just in case)
       const p = allProducts.find(product => String(product.id) === String(id));
       if (p) {
         activeProduct = p;
-        document.getElementById('modalImg').src = p.image.startsWith('/') ? p.image : '/' + p.image;
+        
+        // Handle images array or fallback to single image
+        let imagesToLoad = [];
+        if (p.images && Array.isArray(p.images) && p.images.length > 0) {
+          imagesToLoad = p.images;
+        } else if (typeof p.images === 'string') {
+          try {
+            imagesToLoad = JSON.parse(p.images);
+            if (!Array.isArray(imagesToLoad)) imagesToLoad = [p.image];
+          } catch(e) {
+            imagesToLoad = [p.image];
+          }
+        } else {
+          imagesToLoad = [p.image];
+        }
+
+        currentImages = imagesToLoad;
+        currentImageIndex = 0;
+
+        // Render images
+        if (sliderWrapper) {
+          sliderWrapper.innerHTML = '';
+          imagesToLoad.forEach((src, idx) => {
+            const img = document.createElement('img');
+            img.src = src.startsWith('/') ? src : '/' + src;
+            img.alt = `${p.title} - Image ${idx + 1}`;
+            if (idx === 0) img.classList.add('active');
+            sliderWrapper.appendChild(img);
+          });
+        }
+
+        // Render dots and arrows
+        if (sliderDots) {
+          sliderDots.innerHTML = '';
+          if (imagesToLoad.length > 1) {
+            imagesToLoad.forEach((_, idx) => {
+              const dot = document.createElement('div');
+              dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
+              dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = idx;
+                updateSliderUI();
+              });
+              sliderDots.appendChild(dot);
+            });
+            sliderPrev.style.display = 'flex';
+            sliderNext.style.display = 'flex';
+          } else {
+            sliderPrev.style.display = 'none';
+            sliderNext.style.display = 'none';
+          }
+        }
+
         document.getElementById('modalBadge').textContent = p.collectionType || 'Banarasi';
         document.getElementById('modalTitle').textContent = p.title;
         document.getElementById('modalDesc').textContent = p.desc || '';

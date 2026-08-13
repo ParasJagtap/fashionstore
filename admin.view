@@ -121,8 +121,9 @@
             </div>
 
             <div class="form-group">
-              <label>Product Image</label>
-              <input type="file" id="image" accept="image/*" required>
+              <label>Product Images</label>
+              <input type="file" id="images" accept="image/*" multiple required>
+              <small style="color: rgba(255,255,255,0.5); display: block; margin-top: 5px;">Select up to 5 images. The first image will be the primary thumbnail.</small>
             </div>
             <div style="display: flex; gap: 10px;">
               <button type="submit" class="admin-btn" id="submitBtn" style="flex: 1;">Upload Product</button>

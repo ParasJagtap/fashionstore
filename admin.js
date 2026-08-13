@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.admin-form h2').textContent = 'Add New Product';
         document.getElementById('submitBtn').textContent = 'Upload Product';
         cancelBtn.style.display = 'none';
-        // Make image required again for new uploads
-        document.getElementById('image').required = true;
+        // Make images required again for new uploads
+        document.getElementById('images').required = true;
     };
 
     // Fetch and display products
@@ -69,7 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('colorFamily').value) formData.append('colorFamily', document.getElementById('colorFamily').value);
         if (document.getElementById('priceRange').value) formData.append('priceRange', document.getElementById('priceRange').value);
         if (document.getElementById('pattern').value) formData.append('pattern', document.getElementById('pattern').value);
-        if (document.getElementById('image').files[0]) formData.append('image', document.getElementById('image').files[0]);
+        
+        const imageFiles = document.getElementById('images').files;
+        for (let i = 0; i < imageFiles.length; i++) {
+            formData.append('images', imageFiles[i]);
+        }
 
         const submitBtn = document.getElementById('submitBtn');
         const originalText = submitBtn.textContent;
@@ -113,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (product.pattern) document.getElementById('pattern').value = product.pattern;
         
         // Image is not required when editing
-        document.getElementById('image').required = false;
+        document.getElementById('images').required = false;
         
         document.querySelector('.admin-form h2').textContent = 'Edit Product';
         document.getElementById('submitBtn').textContent = 'Update Product';

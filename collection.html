@@ -166,8 +166,13 @@
     <div class="modal-content">
       <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
       <div class="modal-body">
-        <div class="modal-image">
-          <img id="modalImg" src="" alt="Product">
+        <div class="modal-image" id="modalSliderContainer">
+          <div id="modalImagesWrapper">
+            <!-- Images will be injected here -->
+          </div>
+          <div class="slider-btn prev" id="sliderPrev" style="display: none;"><i class="fas fa-chevron-left"></i></div>
+          <div class="slider-btn next" id="sliderNext" style="display: none;"><i class="fas fa-chevron-right"></i></div>
+          <div class="slider-dots" id="sliderDots"></div>
         </div>
         <div class="modal-details" id="modalDetailsPanel">
           <!-- View 1: Product Specifications -->

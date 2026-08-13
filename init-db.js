@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS products (
   "colorFamily" TEXT,
   "priceRange" TEXT,
   pattern TEXT,
-  image TEXT
+  image TEXT,
+  images JSONB DEFAULT '[]'::jsonb
 );
 `;
 
@@ -49,11 +50,12 @@ async function init() {
         console.log(`Found ${localData.length} local products. Commencing migration...`);
 
         for (const p of localData) {
+          const imagesStr = JSON.stringify([p.image]);
           await pool.query(
-            `INSERT INTO products (id, title, "desc", price, "collectionType", "colorFamily", "priceRange", pattern, image)
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            `INSERT INTO products (id, title, "desc", price, "collectionType", "colorFamily", "priceRange", pattern, image, images)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
              ON CONFLICT (id) DO NOTHING`,
-            [p.id, p.title, p.desc, p.price, p.collectionType, p.colorFamily, p.priceRange, p.pattern, p.image]
+            [p.id, p.title, p.desc, p.price, p.collectionType, p.colorFamily, p.priceRange, p.pattern, p.image, imagesStr]
           );
         }
         console.log('Migration completed successfully!');
