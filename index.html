@@ -26,6 +26,33 @@
   <!-- ======== PRELOADER ======== -->
   <div id="preloader" class="preloader"></div>
 
+  <!-- ======== SPLASH ENQUIRY FORM ======== -->
+  <div id="splashForm" class="splash-form" style="display:none;">
+    <div class="splash-form-inner">
+      <div class="ornament" style="justify-content:center; margin-bottom: 8px;"><span class="ornament-icon">✦</span></div>
+      <h2 class="splash-form-title" data-i18n="splash.title">Tell Us What You're Looking For</h2>
+      <p class="splash-form-subtitle" data-i18n="splash.subtitle">Share your details and we'll reach out with the perfect collection for you.</p>
+      <form id="splashEnquiryForm" class="splash-enquiry-form">
+        <div class="splash-form-row">
+          <div class="splash-field">
+            <input type="text" id="splash-name" placeholder="Your Name" data-i18n-placeholder="contact.placeholder.name" required>
+          </div>
+          <div class="splash-field">
+            <input type="tel" id="splash-phone" placeholder="Phone / WhatsApp" data-i18n-placeholder="contact.placeholder.phone" required>
+          </div>
+        </div>
+        <div class="splash-field">
+          <input type="email" id="splash-email" placeholder="Email Address" data-i18n-placeholder="contact.placeholder.email">
+        </div>
+        <div class="splash-field">
+          <textarea id="splash-message" rows="3" placeholder="What are you looking for? (e.g. bridal saree, Abaya, gifting...)" data-i18n-placeholder="splash.placeholder.message" required></textarea>
+        </div>
+        <button type="submit" class="splash-submit-btn" id="splashSubmitBtn" data-i18n="contact.submit">Send Enquiry</button>
+      </form>
+      <button class="splash-skip-btn" id="splashSkipBtn" data-i18n="splash.skip">Skip, just browse →</button>
+    </div>
+  </div>
+
   <!-- ======== NAVBAR ======== -->
   <nav class="navbar" id="navbar">
     <div class="container">

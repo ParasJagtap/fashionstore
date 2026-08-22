@@ -8,7 +8,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLogo = document.querySelector('.nav-logo');
   const navbar = document.getElementById('navbar');
   const heroSection = document.querySelector('.hero');
-  
+  const splashForm = document.getElementById('splashForm');
+  const splashSkipBtn = document.getElementById('splashSkipBtn');
+  const splashEnquiryForm = document.getElementById('splashEnquiryForm');
+  const splashSubmitBtn = document.getElementById('splashSubmitBtn');
+
+  const revealSite = () => {
+    if (splashForm) {
+      splashForm.classList.add('fade-out');
+      setTimeout(() => { splashForm.style.display = 'none'; }, 650);
+    }
+    document.body.style.overflow = '';
+    navbar.classList.add('ready-active');
+    if (heroSection) heroSection.classList.add('ready');
+    navLogo.style.opacity = '1';
+    navLogo.style.transition = '';
+    navLogo.style.transform = '';
+    navLogo.style.transformOrigin = '';
+    navbar.style.zIndex = '';
+  };
+
   if (preloader && navLogo && navbar) {
     document.body.style.overflow = 'hidden';
     navbar.style.zIndex = '10001';
@@ -18,14 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const cleanup = () => {
       const activeLoader = document.getElementById('preloader');
       if (activeLoader) activeLoader.remove();
-      document.body.style.overflow = '';
-      navbar.classList.add('ready-active');
-      if (heroSection) heroSection.classList.add('ready');
-      navLogo.style.opacity = '1';
-      navLogo.style.transition = '';
-      navLogo.style.transform = '';
-      navLogo.style.transformOrigin = '';
-      navbar.style.zIndex = '';
+
+      // Show the splash form instead of immediately revealing site
+      if (splashForm) {
+        splashForm.style.display = 'flex';
+        // Trigger transition on next frame
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            splashForm.classList.add('visible');
+          });
+        });
+      } else {
+        revealSite();
+      }
     };
 
     const runIntro = () => {
@@ -88,6 +112,56 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navbar) navbar.classList.add('ready-active');
     if (heroSection) heroSection.classList.add('ready');
     if (navLogo) navLogo.style.opacity = '1';
+  }
+
+  // --- Splash Form: Skip button ---
+  if (splashSkipBtn) {
+    splashSkipBtn.addEventListener('click', () => {
+      revealSite();
+    });
+  }
+
+  // --- Splash Form: Submit enquiry ---
+  if (splashEnquiryForm) {
+    splashEnquiryForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('splash-name').value.trim();
+      const phone = document.getElementById('splash-phone').value.trim();
+      const email = document.getElementById('splash-email').value.trim();
+      const message = document.getElementById('splash-message').value.trim();
+
+      if (splashSubmitBtn) {
+        splashSubmitBtn.textContent = 'Sending...';
+        splashSubmitBtn.disabled = true;
+      }
+
+      try {
+        const res = await fetch('/api/enquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email: email || `${phone}@whatsapp.noreply`,
+            phone,
+            message: `[Splash Form] ${message}`
+          })
+        });
+
+        if (res.ok) {
+          if (splashSubmitBtn) {
+            splashSubmitBtn.textContent = '✓ Thank you!';
+            splashSubmitBtn.style.background = '#4caf50';
+          }
+          setTimeout(() => revealSite(), 1000);
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (err) {
+        console.error(err);
+        // On failure just reveal the site anyway so user isn't blocked
+        revealSite();
+      }
+    });
   }
 
   // --- Navbar scroll effect ---
