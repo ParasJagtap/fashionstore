@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const collectionData = {
     katan: {
       badge: { en: 'The Sedan', ar: 'السيارات الصالون (السيدان)' },
-      title: { en: 'Katan Silk', ar: 'حرير كتان' },
+      title: { en: 'Banarasi Silk', ar: 'حرير بنارسي' },
       desc: {
-        en: 'The Katan is the gold standard of Banarasi sarees — pure silk, durable, and timelessly classic. Created by twisting pure silk threads together to form a firm, resilient fabric, the Katan is built to last generations.',
-        ar: 'حرير الكتان هو المعيار الذهبي لساريات بنارسي — حرير خالص، متين، وكلاسيكي خالٍ من الزمن. يتم إنتاجه بليّ خيوط الحرير الخالص معاً لتشكيل قماش متين وقوي يدوم لأجيال.'
+        en: 'Banarasi Silk is the gold standard of Banarasi sarees — pure silk, durable, and timelessly classic. Created by twisting pure silk threads together to form a firm, resilient fabric, it is built to last generations.',
+        ar: 'حرير بنارسي هو المعيار الذهبي لساريات بنارسي — حرير خالص، متين، وكلاسيكي خالٍ من الزمن. يتم إنتاجه بليّ خيوط الحرير الخالص معاً لتشكيل قماش متين وقوي يدوم لأجيال.'
       },
       fabric: { en: 'Pure Mulberry Silk', ar: 'حرير التوت الخالص' },
       weave: { en: 'Plain weave with Kadwa technique', ar: 'نسيج عادي بتقنية كادوا' },
@@ -145,6 +145,42 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    const formatPriceAED = (raw) => {
+      if (!raw) return '';
+      const str = String(raw).trim();
+      if (/^AED\s*[\d,]+/i.test(str)) {
+        return str.toUpperCase();
+      }
+      const num = parseInt(str.replace(/[^0-9]/g, ''), 10);
+      if (isNaN(num) || num <= 0) return str;
+      if (str.includes('₹')) {
+        const aedVal = Math.round(num / 22.5);
+        return `AED ${aedVal.toLocaleString()}`;
+      }
+      return `AED ${num.toLocaleString()}`;
+    };
+
+    const getNumericPrice = (p) => {
+      const rawPriceStr = String(p.price || '');
+      let num = parseInt(rawPriceStr.replace(/[^0-9]/g, ''), 10) || 0;
+      if (rawPriceStr.includes('₹')) {
+        num = Math.round(num / 22.5);
+      }
+      return num;
+    };
+
+    const matchesPriceFilter = (p, selectedRanges) => {
+      if (!selectedRanges || selectedRanges.length === 0) return true;
+      const num = getNumericPrice(p);
+      return selectedRanges.some(range => {
+        if (p.priceRange === range) return true;
+        if (range === 'Under AED 1,000' || range === '₹10,000 - ₹25,000') return num > 0 && num < 1000;
+        if (range === 'AED 1,000 - AED 2,500' || range === '₹25,000 - ₹50,000') return num >= 1000 && num <= 2500;
+        if (range === 'AED 2,500+' || range === '₹50,000+') return num > 2500;
+        return false;
+      });
+    };
+
     const renderProducts = () => {
       // 1. Gather active filters
       const activeFilters = {
@@ -163,15 +199,16 @@ document.addEventListener('DOMContentLoaded', () => {
       let filtered = allProducts.filter(p => {
         // Collection Filter
         if (activeCollection && activeCollection !== 'all') {
-          // Normalize matching (Katan Silk vs katan)
+          // Normalize matching (Banarasi Silk / Katan Silk vs katan)
           const typeMap = {
-            'katan': 'Katan Silk',
-            'organza': 'Organza (Kora)',
-            'georgette': 'Georgette',
-            'shattir': 'Shattir',
-            'abaya': 'Luxury Abaya'
+            'katan': ['Banarasi Silk', 'Katan Silk'],
+            'organza': ['Organza (Kora)', 'Organza'],
+            'georgette': ['Georgette'],
+            'shattir': ['Shattir'],
+            'abaya': ['Luxury Abaya', 'Abaya']
           };
-          if (p.collectionType !== typeMap[activeCollection] && p.collectionType !== activeCollection) {
+          const allowedTypes = typeMap[activeCollection] || [activeCollection];
+          if (!allowedTypes.includes(p.collectionType) && p.collectionType !== activeCollection) {
             return false;
           }
         }
@@ -180,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeFilters.colorFamily.length > 0 && !activeFilters.colorFamily.includes(p.colorFamily)) return false;
         
         // Price Filter
-        if (activeFilters.priceRange.length > 0 && !activeFilters.priceRange.includes(p.priceRange)) return false;
+        if (!matchesPriceFilter(p, activeFilters.priceRange)) return false;
         
         // Pattern Filter
         if (activeFilters.pattern.length > 0 && !activeFilters.pattern.includes(p.pattern)) return false;
@@ -193,11 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const sortVal = sortSelect.value;
         if (sortVal === 'Price: Low to High' || sortVal === 'Price: High to Low') {
           filtered.sort((a, b) => {
-            // Extract numeric value from "₹45,000"
-            const getPrice = (str) => parseInt(str.replace(/[^0-9]/g, '')) || 0;
-            const priceA = getPrice(a.price);
-            const priceB = getPrice(b.price);
-            
+            const priceA = getNumericPrice(a);
+            const priceB = getNumericPrice(b);
             if (sortVal === 'Price: Low to High') return priceA - priceB;
             return priceB - priceA;
           });
@@ -211,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gridHtml = `<p style="color:#fff; padding: 40px;">${lang === 'ar' ? 'لا تتوفر قطع تطابق اختيارك الحالي.' : 'No masterpieces match your current selection.'}</p>`;
       } else {
         filtered.forEach(p => {
+          const displayPrice = formatPriceAED(p.price);
           gridHtml += `
             <div class="catalog-card" onclick="openModal('${p.id}')">
               <div class="card-image-wrap">
@@ -221,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="card-desc" style="color:rgba(245,240,232,0.6); font-size:0.8rem; margin-bottom:4px;">
                   ${p.collectionType || ''} | ${p.colorFamily || ''} | ${p.pattern || ''}
                 </p>
-                <p class="card-price" style="display: none;">${p.price}</p>
+                <p class="card-price">${displayPrice}</p>
               </div>
             </div>
           `;
@@ -374,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modalDesc').textContent = p.desc || '';
         document.getElementById('modalColor').textContent = p.colorFamily || '-';
         document.getElementById('modalPattern').textContent = p.pattern || '-';
-        document.getElementById('modalPrice').textContent = p.price || '-';
+        document.getElementById('modalPrice').textContent = formatPriceAED(p.price) || '-';
         
         modal.classList.add('active');
       }
@@ -387,14 +422,17 @@ document.addEventListener('DOMContentLoaded', () => {
         modalSpecsView.style.display = 'none';
         modalFormView.style.display = 'block';
         
+        const priceLabel = formatPriceAED(activeProduct.price);
+        const priceSuffix = priceLabel ? ` (${priceLabel})` : '';
+
         // Pre-fill message field based on language
         const messageField = document.getElementById('modal-form-message');
         if (messageField) {
           const lang = document.documentElement.lang || 'en';
           if (lang === 'ar') {
-            messageField.value = `مرحباً، أنا مهتم باقتناء قطة "${activeProduct.title}" من مجموعة ${activeProduct.collectionType || ''} (اللون: ${activeProduct.colorFamily || '-'}، النمط: ${activeProduct.pattern || '-'}). يرجى تزويدي بالأسعار وإمكانية التوفر.`;
+            messageField.value = `مرحباً، أنا مهتم باقتناء قطة "${activeProduct.title}"${priceSuffix} من مجموعة ${activeProduct.collectionType || ''} (اللون: ${activeProduct.colorFamily || '-'}، النمط: ${activeProduct.pattern || '-'}). يرجى تزويدي بإمكانية التوفر.`;
           } else {
-            messageField.value = `Namaste, I am interested in acquiring the "${activeProduct.title}" saree from the ${activeProduct.collectionType || ''} collection (Color: ${activeProduct.colorFamily || '-'}, Pattern: ${activeProduct.pattern || '-'}). Please share pricing and availability.`;
+            messageField.value = `Namaste, I am interested in acquiring "${activeProduct.title}"${priceSuffix} from the ${activeProduct.collectionType || ''} collection (Color: ${activeProduct.colorFamily || '-'}, Pattern: ${activeProduct.pattern || '-'}). Please share availability details.`;
           }
         }
       });

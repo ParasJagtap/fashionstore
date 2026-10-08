@@ -368,12 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
     katan: {
       image: 'assets/images/saree-katan-silk.png',
       badge: 'The Sedan',
-      title: 'Katan Silk',
-      desc: 'The Katan is the gold standard of Banarasi sarees — pure silk, durable, and timelessly classic. Created by twisting pure silk threads together to form a firm, resilient fabric, the Katan is built to last generations. Its substantial weight and rich drape make it the most prestigious choice for those who value tradition and lasting quality.',
+      title: 'Banarasi Silk',
+      desc: 'Banarasi Silk is the gold standard of handwoven sarees — pure silk, durable, and timelessly classic. Created by twisting pure silk threads together to form a firm, resilient fabric, it is built to last generations. Its substantial weight and rich drape make it the most prestigious choice for those who value tradition and lasting quality.',
       fabric: 'Pure Mulberry Silk (high-ply twisted threads)',
       weave: 'Plain weave with Kadwa (cut-work) or Fekua technique',
       occasion: 'Weddings, Pujas, Grand Celebrations',
-      price: '₹15,000 – ₹2,50,000+'
+      price: 'AED 700 – AED 10,000+'
     },
     organza: {
       image: 'assets/images/saree-organza.png',
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fabric: 'Kora (stiff organza silk) with Zari threads',
       weave: 'Open weave with heavy border Zari work',
       occasion: 'Receptions, Festive Gatherings, Evening Events',
-      price: '₹8,000 – ₹1,50,000+'
+      price: 'AED 350 – AED 6,500+'
     },
     georgette: {
       image: 'assets/images/saree-georgette.png',
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fabric: 'Crepe yarn (twisted S and Z-twist threads)',
       weave: 'Crinkled plain weave with Zari highlights',
       occasion: 'Office Events, Casual Celebrations, Modern Styling',
-      price: '₹5,000 – ₹80,000+'
+      price: 'AED 220 – AED 3,500+'
     },
     shattir: {
       image: 'assets/images/saree-shattir.png',
@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fabric: 'Silk blend with lighter thread count',
       weave: 'Simplified Banarasi weave with minimal Zari',
       occasion: 'Daily Wear, Small Gatherings, Temple Visits',
-      price: '₹3,000 – ₹25,000+'
+      price: 'AED 130 – AED 1,100+'
     }
   };
 
@@ -414,8 +414,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(key) {
     const data = collectionData[key];
     if (!data) return;
-    document.getElementById('modalImage').src = data.image;
-    document.getElementById('modalImage').alt = data.title;
+    const modalImg = document.getElementById('modalImage');
+    if (modalImg) {
+      modalImg.src = data.image;
+      modalImg.alt = data.title;
+      modalImg.classList.add('active');
+    }
     document.getElementById('modalBadge').textContent = data.badge;
     document.getElementById('modalTitle').textContent = data.title;
     document.getElementById('modalDesc').textContent = data.desc;

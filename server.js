@@ -11,8 +11,33 @@ const PORT = 8080;
 
 app.use(cors());
 app.use(express.json());
+// Security middleware: Block direct access to server-side code and secrets
+app.use((req, res, next) => {
+    const forbiddenPatterns = [
+        /\.env/i,
+        /server\.js/i,
+        /package(-lock)?\.json/i,
+        /init-db\.js/i,
+        /clear_inventory\.js/i,
+        /restore_inventory\.js/i,
+        /restore_abayas\.js/i,
+        /generate_data\.js/i,
+        /assign_categories\.js/i,
+        /admin\.view/i,
+        /\.git/i,
+        /node_modules/i
+    ];
+    if (forbiddenPatterns.some(pattern => pattern.test(req.path))) {
+        return res.status(404).send('Not Found');
+    }
+    next();
+});
+
 // Serve static files from the root directory without .html extensions
-app.use(express.static(__dirname, { extensions: ['html'] }));
+app.use(express.static(__dirname, { 
+    extensions: ['html'],
+    dotfiles: 'ignore'
+}));
 
 // Initialize database pool
 const pool = new Pool({
@@ -110,17 +135,30 @@ app.get(['/admin', '/admin.html'], (req, res) => {
     res.status(404).send('Not Found');
 });
 
-// Configure Multer for image uploads
+// Configure Multer for image uploads with security constraints
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path.join(__dirname, 'assets', 'images', 'catalog'));
     },
     filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname);
+        const ext = path.extname(file.originalname).toLowerCase();
         cb(null, `prod-${Date.now()}${ext}`);
     }
 });
-const upload = multer({ storage });
+const upload = multer({ 
+    storage,
+    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB per file
+    fileFilter: (req, file, cb) => {
+        const allowedExts = /jpeg|jpg|png|webp|avif/;
+        const ext = path.extname(file.originalname).toLowerCase().replace('.', '');
+        const isMimeImage = file.mimetype.startsWith('image/');
+        if (allowedExts.test(ext) && isMimeImage) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only image files (JPEG, PNG, WebP, AVIF) are allowed.'));
+        }
+    }
+});
 
 // API: Get all products
 app.get('/api/products', async (req, res) => {
@@ -141,10 +179,10 @@ app.post('/api/products', auth, upload.array('images', 5), async (req, res) => {
         const id = Date.now().toString();
         const pTitle = title || 'New Saree';
         const pDesc = desc || 'Elegant Banarasi Saree';
-        const pPrice = price || '₹0';
-        const pCollection = collectionType || 'Katan Silk';
+        const pPrice = price || 'AED 0';
+        const pCollection = collectionType || 'Banarasi Silk';
         const pColor = colorFamily || 'Crimson Red';
-        const pPriceRange = priceRange || '₹10,000 - ₹25,000';
+        const pPriceRange = priceRange || 'AED 1,000 - AED 2,500';
         const pPattern = pattern || 'Floral Jaal';
         
         // Handle multiple images

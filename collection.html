@@ -97,7 +97,7 @@
           <h4 class="filter-title" data-i18n-html="col.filter.collection">Collection <i class="fas fa-chevron-down"></i></h4>
           <div class="filter-options" id="collectionSwitcher">
             <a href="collection?type=abaya" class="filter-link" data-type="abaya" data-i18n="nav.dd.abaya">Luxury Abaya ✦</a>
-            <a href="collection?type=katan" class="filter-link" data-type="katan" data-i18n="nav.dd.katan">Katan Silk</a>
+            <a href="collection?type=katan" class="filter-link" data-type="katan" data-i18n="nav.dd.katan">Banarasi Silk</a>
             <a href="collection?type=organza" class="filter-link" data-type="organza" data-i18n="nav.dd.organza">Organza (Kora)</a>
             <a href="collection?type=georgette" class="filter-link" data-type="georgette" data-i18n="nav.dd.georgette">Georgette</a>
             <a href="collection?type=shattir" class="filter-link" data-type="shattir" data-i18n="nav.dd.shattir">Shattir</a>
@@ -115,12 +115,12 @@
           </div>
         </div>
 
-        <div class="filter-group" style="display: none;">
-          <h4 class="filter-title">Price Range <i class="fas fa-chevron-down"></i></h4>
+        <div class="filter-group">
+          <h4 class="filter-title" data-i18n-html="col.filter.price">Price Range <i class="fas fa-chevron-down"></i></h4>
           <div class="filter-options">
-            <label class="filter-label"><input type="checkbox" data-filter="priceRange" value="₹10,000 - ₹25,000"> <span>₹10,000 - ₹25,000</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="priceRange" value="₹25,000 - ₹50,000"> <span>₹25,000 - ₹50,000</span></label>
-            <label class="filter-label"><input type="checkbox" data-filter="priceRange" value="₹50,000+"> <span>₹50,000+</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="priceRange" value="Under AED 1,000"> <span data-i18n="price.under1000">Under AED 1,000</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="priceRange" value="AED 1,000 - AED 2,500"> <span data-i18n="price.1000to2500">AED 1,000 - AED 2,500</span></label>
+            <label class="filter-label"><input type="checkbox" data-filter="priceRange" value="AED 2,500+"> <span data-i18n="price.above2500">AED 2,500+</span></label>
           </div>
         </div>
         
@@ -144,8 +144,10 @@
             <label for="sort-select" data-i18n="col.sort.label">Sort by:</label>
             <div class="custom-select-wrapper">
               <select id="sort-select" class="sort-select">
-                <option data-i18n="col.sort.recommended">Recommended</option>
-                <option data-i18n="col.sort.newest">New Arrivals</option>
+                <option value="Recommended" data-i18n="col.sort.recommended">Recommended</option>
+                <option value="New Arrivals" data-i18n="col.sort.newest">New Arrivals</option>
+                <option value="Price: Low to High" data-i18n="col.sort.lowHigh">Price: Low to High</option>
+                <option value="Price: High to Low" data-i18n="col.sort.highLow">Price: High to Low</option>
               </select>
               <i class="fas fa-chevron-down select-icon"></i>
             </div>
@@ -195,10 +197,10 @@
                   <span id="modalPattern">Pattern Name</span>
                 </div>
               </div>
-              <div class="modal-spec-item" style="display: none;">
+              <div class="modal-spec-item">
                 <i class="fas fa-tag"></i>
                 <div>
-                  <strong>Price</strong>
+                  <strong data-i18n="modal.price">Price</strong>
                   <span id="modalPrice">Price</span>
                 </div>
               </div>

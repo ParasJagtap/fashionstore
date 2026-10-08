@@ -7,8 +7,8 @@ if (!fs.existsSync(dataDir)) {
 }
 
 const titles = ["Midnight Bloom", "Crimson Elegance", "Golden Jaal", "Emerald Heritage", "Ruby Classic", "Sapphire Drape", "Ivory Mist", "Vermillion Queen", "Royal Orchid", "Sunset Brocade"];
-const descs = ["Pure Silk with Gold Zari", "Contemporary Silver Zari Weave", "Luminous Tissue Finish", "Rich Traditional Brocade", "Handwoven Katan Silk", "Featherlight Organza Kora", "Fluid Georgette Crepe", "Simplified Shattir Weave", "Heavy Bridal Masterpiece", "Elegant Floral Motifs"];
-const prices = ["₹45,000", "₹32,000", "₹55,000", "₹48,000", "₹38,000", "₹28,500", "₹22,000", "₹15,000", "₹85,000", "₹65,000"];
+const descs = ["Pure Silk with Gold Zari", "Contemporary Silver Zari Weave", "Luminous Tissue Finish", "Rich Traditional Brocade", "Handwoven Banarasi Silk", "Featherlight Organza Kora", "Fluid Georgette Crepe", "Simplified Shattir Weave", "Heavy Bridal Masterpiece", "Elegant Floral Motifs"];
+const prices = ["AED 1,950", "AED 1,400", "AED 2,400", "AED 2,100", "AED 1,650", "AED 1,250", "AED 950", "AED 650", "AED 3,700", "AED 2,850"];
 
 const products = [];
 for (let i = 1; i <= 50; i++) {

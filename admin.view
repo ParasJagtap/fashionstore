@@ -77,8 +77,8 @@
               <textarea id="desc" rows="3" required placeholder="e.g. Pure Silk with Gold Zari"></textarea>
             </div>
             <div class="form-group">
-              <label>Price</label>
-              <input type="text" id="price" required placeholder="e.g. ₹45,000">
+              <label>Price (AED)</label>
+              <input type="text" id="price" required placeholder="e.g. AED 750">
             </div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
@@ -86,7 +86,7 @@
                 <label>Collection</label>
                 <select id="collectionType" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
                   <option value="Luxury Abaya" style="background:#110e0c;">Luxury Abaya</option>
-                  <option value="Katan Silk" style="background:#110e0c;">Katan Silk</option>
+                  <option value="Banarasi Silk" style="background:#110e0c;">Banarasi Silk</option>
                   <option value="Organza (Kora)" style="background:#110e0c;">Organza (Kora)</option>
                   <option value="Georgette" style="background:#110e0c;">Georgette</option>
                   <option value="Shattir" style="background:#110e0c;">Shattir</option>
@@ -105,9 +105,9 @@
               <div class="form-group">
                 <label>Price Range</label>
                 <select id="priceRange" required style="width: 100%; padding: 12px; background: transparent; border: 1px solid rgba(201,168,76,0.3); color: #fff; border-radius: 4px; font-family: var(--font-body);">
-                  <option value="₹10,000 - ₹25,000" style="background:#110e0c;">₹10,000 - ₹25,000</option>
-                  <option value="₹25,000 - ₹50,000" style="background:#110e0c;">₹25,000 - ₹50,000</option>
-                  <option value="₹50,000+" style="background:#110e0c;">₹50,000+</option>
+                  <option value="Under AED 1,000" style="background:#110e0c;">Under AED 1,000</option>
+                  <option value="AED 1,000 - AED 2,500" style="background:#110e0c;">AED 1,000 - AED 2,500</option>
+                  <option value="AED 2,500+" style="background:#110e0c;">AED 2,500+</option>
                 </select>
               </div>
               <div class="form-group">

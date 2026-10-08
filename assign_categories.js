@@ -3,9 +3,9 @@ const path = require('path');
 
 const DATA_FILE = path.join(__dirname, 'data', 'products.json');
 
-const collections = ['Katan Silk', 'Organza (Kora)', 'Georgette', 'Shattir'];
+const collections = ['Banarasi Silk', 'Organza (Kora)', 'Georgette', 'Shattir'];
 const colors = ['Crimson Red', 'Midnight Blue', 'Emerald Green', 'Golden Glow', 'Ivory'];
-const prices = ['₹10,000 - ₹25,000', '₹25,000 - ₹50,000', '₹50,000+'];
+const prices = ['Under AED 1,000', 'AED 1,000 - AED 2,500', 'AED 2,500+'];
 const patterns = ['Floral Jaal', 'Geometric Buti', 'Shikargah'];
 
 const products = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
