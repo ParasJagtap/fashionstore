@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (preloader && navLogo && navbar) {
     document.body.style.overflow = 'hidden';
     navbar.style.zIndex = '10001';
-    
+
     let introRun = false;
-    
+
     const cleanup = () => {
       const activeLoader = document.getElementById('preloader');
       if (activeLoader) activeLoader.remove();
@@ -55,38 +55,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const runIntro = () => {
       if (introRun) return;
       introRun = true;
-      
+
       // Short delay to let browser process layout so coords are valid
       setTimeout(() => {
         const rectLast = navLogo.getBoundingClientRect();
         const centerY = window.innerHeight / 2;
         const centerX = window.innerWidth / 2;
-        
+
         // Fallbacks for logo size if layout hasn't completed yet
         const logoWidth = rectLast.width || (window.innerWidth <= 768 ? 80 : 140);
         const logoHeight = rectLast.height || (window.innerWidth <= 768 ? 80 : 140);
-        
+
         const logoY = rectLast.top ? (rectLast.top + logoHeight / 2) : 50;
         const logoX = rectLast.left ? (rectLast.left + logoWidth / 2) : 100;
-        
+
         const deltaY = centerY - logoY;
         const deltaX = centerX - logoX;
-        
+
         const targetWidth = window.innerWidth <= 768 ? 240 : 400;
         const scale = targetWidth / logoWidth;
-        
+
         navLogo.style.transformOrigin = 'center center';
         navLogo.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scale})`;
         navLogo.style.opacity = '1';
-        
+
         setTimeout(() => {
           navLogo.style.transition = 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease';
           navLogo.style.transform = 'translate(0, 0) scale(1)';
-          
+
           setTimeout(() => {
             preloader.classList.add('fade-out');
           }, 300);
-          
+
           setTimeout(() => {
             cleanup();
           }, 1200);
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const btn = form.querySelector('.submit-btn');
       const originalText = btn.textContent;
-      
+
       const name = document.getElementById('form-name').value;
       const email = document.getElementById('form-email').value;
       const phone = document.getElementById('form-phone').value;
@@ -316,34 +316,34 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify({ name, email, phone, message })
       })
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to send');
-        return res.json();
-      })
-      .then(data => {
-        btn.textContent = '✓ Sent Successfully';
-        btn.style.background = 'var(--color-accent)';
-        btn.style.color = 'var(--color-bg-dark)';
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.style.pointerEvents = '';
-          form.reset();
-        }, 3000);
-      })
-      .catch(err => {
-        console.error(err);
-        btn.textContent = '❌ Failed to Send';
-        btn.style.background = '#ff4d4d';
-        btn.style.color = '#fff';
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.style.pointerEvents = '';
-        }, 3000);
-      });
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to send');
+          return res.json();
+        })
+        .then(data => {
+          btn.textContent = '✓ Sent Successfully';
+          btn.style.background = 'var(--color-accent)';
+          btn.style.color = 'var(--color-bg-dark)';
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.pointerEvents = '';
+            form.reset();
+          }, 3000);
+        })
+        .catch(err => {
+          console.error(err);
+          btn.textContent = '❌ Failed to Send';
+          btn.style.background = '#ff4d4d';
+          btn.style.color = '#fff';
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.pointerEvents = '';
+          }, 3000);
+        });
     });
   }
 
@@ -470,15 +470,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Language switcher toggle for mobile
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.getElementById('langToggle');
   if (toggle) {
-    toggle.addEventListener('click', function(e) {
+    toggle.addEventListener('click', function (e) {
       e.stopPropagation();
       var li = toggle.closest('.lang-switcher');
       if (li) li.classList.toggle('open');
     });
-    document.addEventListener('click', function() {
+    document.addEventListener('click', function () {
       var li = toggle.closest('.lang-switcher');
       if (li) li.classList.remove('open');
     });
